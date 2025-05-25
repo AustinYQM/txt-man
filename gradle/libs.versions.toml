@@ -1,0 +1,22 @@
+[versions]
+org-slf4j = "2.0.17"
+
+[libraries]
+org-junit-jupiter-junit-jupiter-api = "org.junit.jupiter:junit-jupiter-api:5.12.2"
+org-mockito-mockito-core = "org.mockito:mockito-core:5.18.0"
+org-assertj-assertj-core = "org.assertj:assertj-core:4.0.0-M1"
+org-hexworks-zircon-zircon-core-jvm = "org.hexworks.zircon:zircon.core-jvm:2022.1.0-RELEASE"
+org-hexworks-zircon-zircon-jvm-swing = "org.hexworks.zircon:zircon.jvm.swing:2022.1.0-RELEASE"
+org-slf4j-slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "org-slf4j" }
+org-slf4j-slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "org-slf4j" }
+org-yaml-snakeyaml = "org.yaml:snakeyaml:2.4"
+
+[plugins]
+org-jetbrains-kotlin-jvm = "org.jetbrains.kotlin.jvm:2.2.0-RC"
+com-diffplug-spotless = "com.diffplug.spotless:7.0.3"
+com-github-ben-manes-versions = "com.github.ben-manes.versions:0.52.0"
+com-github-spotbugs = "com.github.spotbugs:6.1.12"
+nl-littlerobots-version-catalog-update = "nl.littlerobots.version-catalog-update:1.0.0"
+com-adarshr-test-logger = "com.adarshr.test-logger:4.0.0"
+io-freefair-lombok = "io.freefair.lombok:8.13.1"
+com-gradleup-shadow = "com.gradleup.shadow:9.0.0-beta13"
