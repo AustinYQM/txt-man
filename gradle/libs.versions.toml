@@ -5,8 +5,8 @@ org-slf4j = "2.0.17"
 org-junit-jupiter-junit-jupiter-api = "org.junit.jupiter:junit-jupiter-api:5.12.2"
 org-mockito-mockito-core = "org.mockito:mockito-core:5.18.0"
 org-assertj-assertj-core = "org.assertj:assertj-core:4.0.0-M1"
-org-hexworks-zircon-zircon-core-jvm = "org.hexworks.zircon:zircon.core-jvm:2022.1.0-RELEASE"
-org-hexworks-zircon-zircon-jvm-swing = "org.hexworks.zircon:zircon.jvm.swing:2022.1.0-RELEASE"
+org-hexworks-zircon-zircon-core-jvm = "org.hexworks.zircon:zircon.core-jvm:2021.1.1-PREVIEW"
+org-hexworks-zircon-zircon-jvm-swing = "org.hexworks.zircon:zircon.jvm.swing:2021.1.1-PREVIEW"
 org-slf4j-slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "org-slf4j" }
 org-slf4j-slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "org-slf4j" }
 org-yaml-snakeyaml = "org.yaml:snakeyaml:2.4"

@@ -1,16 +1,31 @@
 package com.yqmonline
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, $name!")
+import org.hexworks.zircon.api.CP437TilesetResources
+import org.hexworks.zircon.api.ColorThemes
+import org.hexworks.zircon.api.Components
+import org.hexworks.zircon.api.SwingApplications
+import org.hexworks.zircon.api.application.AppConfig
+import org.hexworks.zircon.api.extensions.toScreen
 
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
-    }
+fun main(args: Array<String>) {
+    val tileGrid =
+        SwingApplications.startTileGrid(
+            AppConfig
+                .newBuilder()
+                .withSize(60, 30)
+                .withDefaultTileset(CP437TilesetResources.rexPaint16x16())
+                .build(),
+        )
+
+    val screen = tileGrid.toScreen()
+
+    screen.addComponent(
+        Components
+            .label()
+            .withText("Hello, Gwendolyn!")
+            .withPosition(23, 10),
+    )
+
+    screen.display()
+    screen.theme = ColorThemes.arc()
 }

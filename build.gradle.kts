@@ -1,11 +1,10 @@
-import org.gradle.internal.impldep.org.bouncycastle.crypto.CryptoServicesConstraints
 
 plugins {
     pmd
     jacoco
     java
+    application
 
-    
     alias(libs.plugins.org.jetbrains.kotlin.jvm)
 
     alias(libs.plugins.com.diffplug.spotless)
@@ -40,15 +39,12 @@ dependencies {
     testImplementation(libs.org.junit.jupiter.junit.jupiter.api)
     testImplementation(libs.org.mockito.mockito.core)
     testImplementation(libs.org.assertj.assertj.core)
-
-    
 }
 
-tasks.withType<Test>() {
+tasks.withType<Test> {
     useJUnitPlatform()
     outputs.dir(snippetsDir)
 
-    
     finalizedBy(tasks.jacocoTestReport)
 }
 
@@ -110,4 +106,18 @@ configure<com.adarshr.gradle.testlogger.TestLoggerExtension> {
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
     dependsOn(tasks.spotlessApply)
+}
+
+tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+    archiveBaseName.set("com.yqmonline.txt-man")
+    mergeServiceFiles()
+}
+tasks.build { dependsOn(tasks.shadowJar) }
+
+val jar by tasks.getting(Jar::class) {
+    manifest.attributes["Main-Class"] = "com.yqmonline.MainKt"
+}
+
+application {
+    mainClass = "com.yqmonline.MainKt"
 }
