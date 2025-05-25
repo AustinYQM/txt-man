@@ -8,32 +8,29 @@ import org.hexworks.zircon.api.component.ComponentAlignment
 import org.hexworks.zircon.api.grid.TileGrid
 import org.hexworks.zircon.api.view.base.BaseView
 
-class StartView(
+class PlayView(
     private val grid: TileGrid,
 ) : BaseView(grid, ColorThemes.arc()) {
     init {
-        val msg = "Welcome to TXT Man!"
-
-        val header =
-            Components
-                .textBox(contentWidth = msg.length)
-                .addHeader(msg)
-                .addNewLine()
-                .withAlignmentWithin(screen, ComponentAlignment.CENTER)
-                .build()
-
-        val startButton =
+        val loseButton =
             Components
                 .button()
-                .withAlignmentAround(header, ComponentAlignment.BOTTOM_CENTER)
-                .withText("Start!")
+                .withAlignmentWithin(screen, ComponentAlignment.LEFT_CENTER)
+                .withText("Lose!")
                 .withDecorations(box(), shadow())
                 .build()
 
-        startButton.onActivated {
-            replaceWith(PlayView(grid))
-        }
+        val winButton =
+            Components
+                .button()
+                .withAlignmentWithin(screen, ComponentAlignment.RIGHT_CENTER)
+                .withText("Win!")
+                .withDecorations(box(), shadow())
+                .build()
 
-        screen.addComponents(header, startButton)
+        winButton.onActivated { replaceWith(WinView(grid)) }
+        loseButton.onActivated { replaceWith(LoseView(grid)) }
+
+        screen.addComponents(loseButton, winButton)
     }
 }

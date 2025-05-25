@@ -1,15 +1,19 @@
 [versions]
 org-slf4j = "2.0.17"
+org-hexworks-zircon = "2020.2.0-RELEASE"
+ch-qos-logback = "1.5.18"
 
 [libraries]
 org-junit-jupiter-junit-jupiter-api = "org.junit.jupiter:junit-jupiter-api:5.12.2"
 org-mockito-mockito-core = "org.mockito:mockito-core:5.18.0"
 org-assertj-assertj-core = "org.assertj:assertj-core:4.0.0-M1"
-org-hexworks-zircon-zircon-core-jvm = "org.hexworks.zircon:zircon.core-jvm:2021.1.1-PREVIEW"
-org-hexworks-zircon-zircon-jvm-swing = "org.hexworks.zircon:zircon.jvm.swing:2021.1.1-PREVIEW"
+org-hexworks-zircon-zircon-core-jvm = { module = "org.hexworks.zircon:zircon.core-jvm", version.ref = "org-hexworks-zircon" }
+org-hexworks-zircon-zircon-jvm-swing = { module = "org.hexworks.zircon:zircon.jvm.swing",  version.ref = "org-hexworks-zircon" }
 org-slf4j-slf4j-api = { module = "org.slf4j:slf4j-api", version.ref = "org-slf4j" }
-org-slf4j-slf4j-simple = { module = "org.slf4j:slf4j-simple", version.ref = "org-slf4j" }
 org-yaml-snakeyaml = "org.yaml:snakeyaml:2.4"
+com-github-ben-manes-caffeine-caffeine = "com.github.ben-manes.caffeine:caffeine:3.2.0"
+ch-qos-logback-logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "ch-qos-logback"}
+ch-qos-logback-logback-core = { module = "ch.qos.logback:logback-core", version.ref = "ch-qos-logback"}
 
 [plugins]
 org-jetbrains-kotlin-jvm = "org.jetbrains.kotlin.jvm:2.2.0-RC"

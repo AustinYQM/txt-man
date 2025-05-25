@@ -29,11 +29,14 @@ dependencies {
         implementation(libs.org.yaml.snakeyaml) {
             because("Shit is super borked")
         }
+        implementation(libs.com.github.ben.manes.caffeine.caffeine)
+        implementation(libs.ch.qos.logback.logback.classic)
+        implementation(libs.ch.qos.logback.logback.core)
     }
     implementation(libs.org.hexworks.zircon.zircon.core.jvm)
     implementation(libs.org.hexworks.zircon.zircon.jvm.swing)
     implementation(libs.org.slf4j.slf4j.api)
-    implementation(libs.org.slf4j.slf4j.simple)
+//    implementation(libs.org.slf4j.slf4j.simple)
 
     testImplementation(kotlin("test"))
     testImplementation(libs.org.junit.jupiter.junit.jupiter.api)
