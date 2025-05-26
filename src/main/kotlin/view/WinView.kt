@@ -1,6 +1,6 @@
 package com.yqmonline.view
 
-import org.hexworks.zircon.api.ColorThemes
+import com.yqmonline.config.GameConfig
 import org.hexworks.zircon.api.ComponentDecorations.box
 import org.hexworks.zircon.api.Components
 import org.hexworks.zircon.api.component.ComponentAlignment
@@ -10,7 +10,7 @@ import kotlin.system.exitProcess
 
 class WinView(
     private val grid: TileGrid,
-) : BaseView(grid, ColorThemes.arc()) {
+) : BaseView(grid, GameConfig.THEME) {
     init {
         val header =
             Components

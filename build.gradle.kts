@@ -36,7 +36,10 @@ dependencies {
     implementation(libs.org.hexworks.zircon.zircon.core.jvm)
     implementation(libs.org.hexworks.zircon.zircon.jvm.swing)
     implementation(libs.org.slf4j.slf4j.api)
-//    implementation(libs.org.slf4j.slf4j.simple)
+
+    implementation(libs.com.github.gestalt.config.gestalt.core)
+    implementation(libs.com.github.gestalt.config.gestalt.kotlin)
+    implementation(libs.com.github.gestalt.config.gestalt.yaml)
 
     testImplementation(kotlin("test"))
     testImplementation(libs.org.junit.jupiter.junit.jupiter.api)

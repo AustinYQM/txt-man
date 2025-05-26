@@ -1,8 +1,11 @@
 package com.yqmonline.view
 
-import org.hexworks.zircon.api.ColorThemes
+import com.yqmonline.config.GameConfig
+import com.yqmonline.config.GameConfig.LOG_AREA_HEIGHT
+import com.yqmonline.config.GameConfig.SIDEBAR_WIDTH
+import com.yqmonline.config.GameConfig.WINDOW_HEIGHT
+import com.yqmonline.config.GameConfig.WINDOW_WIDTH
 import org.hexworks.zircon.api.ComponentDecorations.box
-import org.hexworks.zircon.api.ComponentDecorations.shadow
 import org.hexworks.zircon.api.Components
 import org.hexworks.zircon.api.component.ComponentAlignment
 import org.hexworks.zircon.api.grid.TileGrid
@@ -10,27 +13,23 @@ import org.hexworks.zircon.api.view.base.BaseView
 
 class PlayView(
     private val grid: TileGrid,
-) : BaseView(grid, ColorThemes.arc()) {
+) : BaseView(grid, GameConfig.THEME) {
     init {
-        val loseButton =
+        val sidebar =
             Components
-                .button()
-                .withAlignmentWithin(screen, ComponentAlignment.LEFT_CENTER)
-                .withText("Lose!")
-                .withDecorations(box(), shadow())
+                .panel()
+                .withSize(SIDEBAR_WIDTH, WINDOW_HEIGHT)
+                .withDecorations(box())
                 .build()
 
-        val winButton =
+        val logArea =
             Components
-                .button()
-                .withAlignmentWithin(screen, ComponentAlignment.RIGHT_CENTER)
-                .withText("Win!")
-                .withDecorations(box(), shadow())
+                .logArea()
+                .withDecorations(box(title = "Log"))
+                .withSize(WINDOW_WIDTH - SIDEBAR_WIDTH, LOG_AREA_HEIGHT)
+                .withAlignmentWithin(screen, ComponentAlignment.BOTTOM_RIGHT)
                 .build()
 
-        winButton.onActivated { replaceWith(WinView(grid)) }
-        loseButton.onActivated { replaceWith(LoseView(grid)) }
-
-        screen.addComponents(loseButton, winButton)
+        screen.addComponents(sidebar, logArea)
     }
 }

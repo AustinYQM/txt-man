@@ -1,6 +1,6 @@
 package com.yqmonline.view
 
-import org.hexworks.zircon.api.ColorThemes
+import com.yqmonline.config.GameConfig
 import org.hexworks.zircon.api.ComponentDecorations.box
 import org.hexworks.zircon.api.ComponentDecorations.shadow
 import org.hexworks.zircon.api.Components
@@ -10,7 +10,7 @@ import org.hexworks.zircon.api.view.base.BaseView
 
 class StartView(
     private val grid: TileGrid,
-) : BaseView(grid, ColorThemes.arc()) {
+) : BaseView(grid, GameConfig.THEME) {
     init {
         val msg = "Welcome to TXT Man!"
 
