@@ -35,6 +35,8 @@ dependencies {
     }
     implementation(libs.org.hexworks.zircon.zircon.core.jvm)
     implementation(libs.org.hexworks.zircon.zircon.jvm.swing)
+    implementation(libs.org.hexworks.amethyst.amethyst.core.jvm)
+//    implementation(libs.org.hexworks.cobalt.cobalt.core.jvm)
     implementation(libs.org.slf4j.slf4j.api)
 
     implementation(libs.com.github.gestalt.config.gestalt.core)

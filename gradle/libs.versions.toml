@@ -3,6 +3,8 @@ org-slf4j = "2.0.17"
 org-hexworks-zircon = "2020.2.0-RELEASE"
 ch-qos-logback = "1.5.18"
 com-github-gastalt-config = "0.35.7"
+org-hexworks-amethyst = "2020.1.1-RELEASE"
+#org-hexworks-cobalt = "2022.1.0-RELEASE"
 
 [libraries]
 org-junit-jupiter-junit-jupiter-api = "org.junit.jupiter:junit-jupiter-api:5.12.2"
@@ -18,6 +20,8 @@ ch-qos-logback-logback-core = { module = "ch.qos.logback:logback-core", version.
 com-github-gestalt-config-gestalt-core = { module = "com.github.gestalt-config:gestalt-core", version.ref = "com-github-gastalt-config" }
 com-github-gestalt-config-gestalt-kotlin = { module = "com.github.gestalt-config:gestalt-kotlin", version.ref = "com-github-gastalt-config" }
 com-github-gestalt-config-gestalt-yaml = { module = "com.github.gestalt-config:gestalt-yaml", version.ref = "com-github-gastalt-config" }
+org-hexworks-amethyst-amethyst-core-jvm = { module = "org.hexworks.amethyst:amethyst.core-jvm", version.ref = "org-hexworks-amethyst" }
+#org-hexworks-cobalt-cobalt-core-jvm = { module = "org.hexworks.cobalt:cobalt.core-jvm", version.ref = "org-hexworks-cobalt" }
 
 [plugins]
 org-jetbrains-kotlin-jvm = "org.jetbrains.kotlin.jvm:2.2.0-RC"
