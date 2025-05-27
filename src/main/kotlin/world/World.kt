@@ -1,15 +1,19 @@
 package com.yqmonline.world
 
+import Entity
 import com.yqmonline.blocks.GameBlock
 import com.yqmonline.extensions.AnyGameEntity
 import com.yqmonline.extensions.position
 import org.hexworks.amethyst.api.Engine
+import org.hexworks.amethyst.internal.TurnBasedEngine
 import org.hexworks.cobalt.datatypes.Maybe
 import org.hexworks.zircon.api.builder.game.GameAreaBuilder
 import org.hexworks.zircon.api.data.Position3D
 import org.hexworks.zircon.api.data.Size3D
 import org.hexworks.zircon.api.data.Tile
 import org.hexworks.zircon.api.game.GameArea
+import org.hexworks.zircon.api.screen.Screen
+import org.hexworks.zircon.api.uievent.UIEvent
 
 class World(
     startingBlocks: Map<Position3D, GameBlock>,
@@ -20,7 +24,7 @@ class World(
         .withVisibleSize(visibleSize)
         .withActualSize(actualSize)
         .build() {
-    private val engine: Engine<GameContext> = Engine.create()
+    private val engine: TurnBasedEngine<GameContext> = Engine.create()
 
     init {
         startingBlocks.forEach { (pos, block) ->
@@ -88,5 +92,50 @@ class World(
             currentTry++
         }
         return position
+    }
+
+    fun moveEntity(
+        entity: AnyGameEntity,
+        position: Position3D,
+    ): Boolean {
+        var success = false
+        val oldBlock = fetchBlockAt(entity.position)
+        val newBlock = fetchBlockAt(position)
+
+        if (bothBlocksPresent(oldBlock, newBlock)) {
+            success = true
+            oldBlock.get().removeEntity(entity)
+            entity.position = position
+            newBlock.get().addEntity(entity)
+        }
+        return success
+    }
+
+    private fun bothBlocksPresent(
+        oldBlock: Maybe<GameBlock>,
+        newBlock: Maybe<GameBlock>,
+    ) = oldBlock.isPresent && newBlock.isPresent
+
+    fun update(
+        screen: Screen,
+        uiEvent: UIEvent,
+        game: Game,
+    ) {
+        engine.executeTurn(
+            GameContext(
+                world = this,
+                screen = screen,
+                uiEvent = uiEvent,
+                player = game.player,
+            ),
+        )
+    }
+
+    fun removeEntity(entity: AnyGameEntity) {
+        fetchBlockAt(entity.position).map {
+            it.removeEntity(entity)
+        }
+        engine.removeEntity(entity)
+        entity.position = Position3D.unknown()
     }
 }

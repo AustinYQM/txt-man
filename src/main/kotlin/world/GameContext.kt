@@ -6,7 +6,7 @@ import org.hexworks.amethyst.api.Context
 import org.hexworks.zircon.api.screen.Screen
 import org.hexworks.zircon.api.uievent.UIEvent
 
-class GameContext(
+data class GameContext(
     val world: World,
     val screen: Screen,
     val uiEvent: UIEvent,

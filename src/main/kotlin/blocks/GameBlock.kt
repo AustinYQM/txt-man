@@ -1,21 +1,26 @@
 package com.yqmonline.blocks
 
-import com.yqmonline.extensions.GameEntity
+import com.yqmonline.extensions.AnyGameEntity
+import com.yqmonline.extensions.occupiesBlock
 import com.yqmonline.extensions.tile
 import com.yqmonline.tiles.GameTileRepository.EMPTY
 import com.yqmonline.tiles.GameTileRepository.FLOOR
 import com.yqmonline.tiles.GameTileRepository.PLAYER
 import com.yqmonline.tiles.GameTileRepository.WALL
 import kotlinx.collections.immutable.persistentMapOf
-import org.hexworks.amethyst.api.entity.EntityType
+import org.hexworks.cobalt.datatypes.Maybe
 import org.hexworks.zircon.api.data.BlockTileType
 import org.hexworks.zircon.api.data.Tile
 import org.hexworks.zircon.api.data.base.BaseBlock
 
 class GameBlock(
     private var defaultTile: Tile = FLOOR,
-    private val currentEntities: MutableList<GameEntity<EntityType>> = mutableListOf(),
+    private val currentEntities: MutableList<AnyGameEntity> = mutableListOf(),
 ) : BaseBlock<Tile>(emptyTile = EMPTY, tiles = persistentMapOf(BlockTileType.CONTENT to defaultTile)) {
+    init {
+        updateContent()
+    }
+
     val isFloor: Boolean
         get() = defaultTile == FLOOR
 
@@ -25,15 +30,21 @@ class GameBlock(
     val isEmptyFloor: Boolean
         get() = currentEntities.isEmpty()
 
-    val entities: Iterable<GameEntity<EntityType>>
+    val entities: Iterable<AnyGameEntity>
         get() = currentEntities.toList()
 
-    fun addEntity(entity: GameEntity<EntityType>) {
+    fun addEntity(entity: AnyGameEntity) {
         currentEntities.add(entity)
         updateContent()
     }
 
-    fun removeEntity(entity: GameEntity<EntityType>) {
+    val occupier: Maybe<AnyGameEntity>
+        get() = Maybe.ofNullable(currentEntities.firstOrNull { it.occupiesBlock })
+
+    val isOccupied: Boolean
+        get() = occupier.isPresent
+
+    fun removeEntity(entity: AnyGameEntity) {
         currentEntities.remove(entity)
         updateContent()
     }
@@ -46,5 +57,9 @@ class GameBlock(
                 entityTiles.isNotEmpty() -> entityTiles.first()
                 else -> defaultTile
             }
+    }
+
+    companion object {
+        fun createWith(entity: AnyGameEntity) = GameBlock(currentEntities = mutableListOf(entity))
     }
 }

@@ -1,8 +1,16 @@
 package com.yqmonline.entities
 
+import com.yqmonline.attributes.BlockOccupier
+import com.yqmonline.attributes.EntityActions
 import com.yqmonline.attributes.EntityPosition
 import com.yqmonline.attributes.EntityTile
+import com.yqmonline.messages.Dig
+import com.yqmonline.systems.CameraMover
+import com.yqmonline.systems.Diggable
+import com.yqmonline.systems.InputReceiver
+import com.yqmonline.systems.Movable
 import com.yqmonline.tiles.GameTileRepository.PLAYER
+import com.yqmonline.tiles.GameTileRepository.WALL
 import com.yqmonline.world.GameContext
 import org.hexworks.amethyst.api.builder.EntityBuilder
 import org.hexworks.amethyst.api.entity.EntityType
@@ -16,8 +24,22 @@ fun <T : EntityType> newGameEntityOfType(
 object EntityFactory {
     fun newPlayer() =
         newGameEntityOfType(Player) {
-            attributes(EntityPosition(), EntityTile(PLAYER))
-            behaviors()
-            facets()
+            attributes(
+                EntityPosition(),
+                EntityTile(PLAYER),
+                EntityActions(Dig::class),
+            )
+            behaviors(InputReceiver)
+            facets(Movable, CameraMover)
+        }
+
+    fun newWall() =
+        newGameEntityOfType(Wall) {
+            attributes(
+                EntityPosition(),
+                BlockOccupier,
+                EntityTile(WALL),
+            )
+            facets(Diggable)
         }
 }
