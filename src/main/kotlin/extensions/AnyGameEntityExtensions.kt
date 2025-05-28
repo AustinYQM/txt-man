@@ -4,6 +4,7 @@ import com.yqmonline.attributes.BlockOccupier
 import com.yqmonline.attributes.EntityActions
 import com.yqmonline.attributes.EntityPosition
 import com.yqmonline.attributes.EntityTile
+import com.yqmonline.attributes.VisionBlocker
 import com.yqmonline.entities.Player
 import com.yqmonline.world.GameContext
 import org.hexworks.amethyst.api.Attribute
@@ -47,3 +48,6 @@ suspend fun AnyGameEntity.tryActionsOn(
     }
     return result
 }
+
+val AnyGameEntity.blocksVision: Boolean
+    get() = this.findAttribute(VisionBlocker::class).isPresent

@@ -34,6 +34,8 @@ class GameBuilder(
         val player = addPlayer()
         addFungi()
 
+        world.addWorldEntity(EntityFactory.newFogOfWar())
+
         return Game.create(
             player = player,
             world = world,

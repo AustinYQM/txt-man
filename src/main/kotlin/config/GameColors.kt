@@ -13,4 +13,7 @@ object GameColors {
 
     // Entities
     val FUNGUS_COLOR = TileColor.fromString("#85DD1B")
+
+    // Vision
+    val UNREVEALED_COLOR = TileColor.fromString("#090909")
 }

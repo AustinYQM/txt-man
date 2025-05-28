@@ -6,12 +6,15 @@ import com.yqmonline.attributes.EntityActions
 import com.yqmonline.attributes.EntityPosition
 import com.yqmonline.attributes.EntityTile
 import com.yqmonline.attributes.FungusSpread
+import com.yqmonline.attributes.Vision
+import com.yqmonline.attributes.VisionBlocker
 import com.yqmonline.messages.Attack
 import com.yqmonline.messages.Dig
 import com.yqmonline.systems.Attackable
 import com.yqmonline.systems.CameraMover
 import com.yqmonline.systems.Destructible
 import com.yqmonline.systems.Diggable
+import com.yqmonline.systems.FogOfWar
 import com.yqmonline.systems.FungusGrowth
 import com.yqmonline.systems.InputReceiver
 import com.yqmonline.systems.Movable
@@ -40,6 +43,7 @@ object EntityFactory {
                 EntityTile(PLAYER),
                 EntityActions(Dig::class, Attack::class),
                 CombatStats.create(maxHp = 100, attackValue = 10, defenseValue = 5),
+                Vision(9),
             )
             behaviors(InputReceiver)
             facets(Movable, CameraMover, StairClimber, StairDescender)
@@ -51,6 +55,7 @@ object EntityFactory {
                 EntityPosition(),
                 BlockOccupier,
                 EntityTile(WALL),
+                VisionBlocker,
             )
             facets(Diggable)
         }
@@ -86,5 +91,10 @@ object EntityFactory {
                 EntityPosition(),
                 EntityTile(STAIRS_UP),
             )
+        }
+
+    fun newFogOfWar() =
+        newGameEntityOfType(FOW) {
+            behaviors(FogOfWar)
         }
 }

@@ -4,6 +4,7 @@ import com.yqmonline.config.GameColors.ACCENT_COLOR
 import com.yqmonline.config.GameColors.FLOOR_BACKGROUND
 import com.yqmonline.config.GameColors.FLOOR_FOREGROUND
 import com.yqmonline.config.GameColors.FUNGUS_COLOR
+import com.yqmonline.config.GameColors.UNREVEALED_COLOR
 import com.yqmonline.config.GameColors.WALL_BACKGROUND
 import com.yqmonline.config.GameColors.WALL_FOREGROUND
 import org.hexworks.zircon.api.data.CharacterTile
@@ -59,5 +60,12 @@ object GameTileRepository {
             .withCharacter('>')
             .withForegroundColor(ACCENT_COLOR)
             .withBackgroundColor(FLOOR_BACKGROUND)
+            .buildCharacterTile()
+
+    val UNREVEALED =
+        Tile
+            .newBuilder()
+            .withCharacter(' ')
+            .withBackgroundColor(UNREVEALED_COLOR)
             .buildCharacterTile()
 }

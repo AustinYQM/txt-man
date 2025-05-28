@@ -3,6 +3,7 @@ package com.yqmonline.blocks
 import com.yqmonline.extensions.AnyGameEntity
 import com.yqmonline.extensions.occupiesBlock
 import com.yqmonline.extensions.tile
+import com.yqmonline.tiles.GameTileRepository
 import com.yqmonline.tiles.GameTileRepository.EMPTY
 import com.yqmonline.tiles.GameTileRepository.FLOOR
 import com.yqmonline.tiles.GameTileRepository.PLAYER
@@ -18,6 +19,7 @@ class GameBlock(
     private val currentEntities: MutableList<AnyGameEntity> = mutableListOf(),
 ) : BaseBlock<Tile>(emptyTile = EMPTY, tiles = persistentMapOf(BlockTileType.CONTENT to defaultTile)) {
     init {
+        top = GameTileRepository.UNREVEALED
         updateContent()
     }
 
