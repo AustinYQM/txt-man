@@ -15,8 +15,12 @@ import com.yqmonline.systems.Diggable
 import com.yqmonline.systems.FungusGrowth
 import com.yqmonline.systems.InputReceiver
 import com.yqmonline.systems.Movable
+import com.yqmonline.systems.StairClimber
+import com.yqmonline.systems.StairDescender
 import com.yqmonline.tiles.GameTileRepository.FUNGUS
 import com.yqmonline.tiles.GameTileRepository.PLAYER
+import com.yqmonline.tiles.GameTileRepository.STAIRS_DOWN
+import com.yqmonline.tiles.GameTileRepository.STAIRS_UP
 import com.yqmonline.tiles.GameTileRepository.WALL
 import com.yqmonline.world.GameContext
 import org.hexworks.amethyst.api.builder.EntityBuilder
@@ -38,7 +42,7 @@ object EntityFactory {
                 CombatStats.create(maxHp = 100, attackValue = 10, defenseValue = 5),
             )
             behaviors(InputReceiver)
-            facets(Movable, CameraMover)
+            facets(Movable, CameraMover, StairClimber, StairDescender)
         }
 
     fun newWall() =
@@ -66,5 +70,21 @@ object EntityFactory {
             )
             facets(Attackable, Destructible)
             behaviors(FungusGrowth)
+        }
+
+    fun newStairsDown() =
+        newGameEntityOfType(StairsDown) {
+            attributes(
+                EntityPosition(),
+                EntityTile(STAIRS_DOWN),
+            )
+        }
+
+    fun newStairsUp() =
+        newGameEntityOfType(StairsUp) {
+            attributes(
+                EntityPosition(),
+                EntityTile(STAIRS_UP),
+            )
         }
 }
