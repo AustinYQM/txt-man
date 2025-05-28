@@ -8,6 +8,7 @@ import org.hexworks.zircon.api.component.ComponentAlignment
 import org.hexworks.zircon.api.grid.TileGrid
 import org.hexworks.zircon.api.view.base.BaseView
 
+/** @param grid */
 class StartView(
     private val grid: TileGrid,
 ) : BaseView(grid, GameConfig.THEME) {
@@ -30,9 +31,7 @@ class StartView(
                 .withDecorations(box(), shadow())
                 .build()
 
-        startButton.onActivated {
-            replaceWith(PlayView(grid))
-        }
+        startButton.onActivated { replaceWith(PlayView(grid)) }
 
         screen.addComponents(header, startButton)
     }

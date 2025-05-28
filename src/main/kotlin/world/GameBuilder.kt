@@ -1,6 +1,7 @@
 package com.yqmonline.world
 
 import com.yqmonline.config.GameConfig.DUNGEON_LEVELS
+import com.yqmonline.config.GameConfig.FUNGI_PER_LEVEL
 import com.yqmonline.config.GameConfig.LOG_AREA_HEIGHT
 import com.yqmonline.config.GameConfig.SIDEBAR_WIDTH
 import com.yqmonline.config.GameConfig.WINDOW_HEIGHT
@@ -9,7 +10,9 @@ import com.yqmonline.config.GameConfig.WORLD_SIZE
 import com.yqmonline.entities.EntityFactory
 import com.yqmonline.entities.Player
 import com.yqmonline.extensions.GameEntity
+import org.hexworks.amethyst.api.entity.EntityType
 import org.hexworks.zircon.api.data.Position3D
+import org.hexworks.zircon.api.data.Size
 import org.hexworks.zircon.api.data.Size3D
 
 class GameBuilder(
@@ -24,29 +27,44 @@ class GameBuilder(
 
     val world = WorldBuilder(worldSize).makeCaves().build(visibleSize = visibleSize)
 
-    private fun prepareWorld() =
-        also {
-            world.scrollUpBy(world.actualSize.zLength)
-        }
-
-    private fun addPlayer(): GameEntity<Player> {
-        val player = EntityFactory.newPlayer()
-        world.addAtEmptyPosition(
-            player,
-            offset = Position3D.create(0, 0, DUNGEON_LEVELS - 1),
-            size = world.visibleSize.copy(zLength = 0),
-        )
-        return player
-    }
+    private fun prepareWorld() = also { world.scrollUpBy(world.actualSize.zLength) }
 
     fun buildGame(): Game {
         prepareWorld()
         val player = addPlayer()
+        addFungi()
 
         return Game.create(
             player = player,
             world = world,
         )
+    }
+
+    private fun addPlayer(): GameEntity<Player> =
+        EntityFactory
+            .newPlayer()
+            .addToWorld(
+                atLevel = DUNGEON_LEVELS - 1,
+                atArea = world.visibleSize.to2DSize(),
+            )
+
+    private fun addFungi() =
+        also {
+            repeat(world.actualSize.zLength) { level ->
+                repeat(FUNGI_PER_LEVEL) { EntityFactory.newFungus().addToWorld(level) }
+            }
+        }
+
+    private fun <T : EntityType> GameEntity<T>.addToWorld(
+        atLevel: Int,
+        atArea: Size = world.actualSize.to2DSize(),
+    ): GameEntity<T> {
+        world.addAtEmptyPosition(
+            this,
+            offset = Position3D.defaultPosition().withZ(atLevel),
+            size = Size3D.from2DSize(atArea),
+        )
+        return this
     }
 
     companion object {

@@ -1,4 +1,3 @@
-
 plugins {
     pmd
     jacoco
@@ -17,18 +16,16 @@ plugins {
 }
 
 group = "com.yqmonline"
+
 version = "1.0-SNAPSHOT"
+
 val snippetsDir by extra { file("build/generated-snippets") }
 
-repositories {
-    mavenCentral()
-}
+repositories { mavenCentral() }
 
 dependencies {
     constraints {
-        implementation(libs.org.yaml.snakeyaml) {
-            because("Shit is super borked")
-        }
+        implementation(libs.org.yaml.snakeyaml) { because("Shit is super borked") }
         implementation(libs.com.github.ben.manes.caffeine.caffeine)
         implementation(libs.ch.qos.logback.logback.classic)
         implementation(libs.ch.qos.logback.logback.core)
@@ -36,7 +33,7 @@ dependencies {
     implementation(libs.org.hexworks.zircon.zircon.core.jvm)
     implementation(libs.org.hexworks.zircon.zircon.jvm.swing)
     implementation(libs.org.hexworks.amethyst.amethyst.core.jvm)
-//    implementation(libs.org.hexworks.cobalt.cobalt.core.jvm)
+    //    implementation(libs.org.hexworks.cobalt.cobalt.core.jvm)
     implementation(libs.org.slf4j.slf4j.api)
 
     implementation(libs.com.github.gestalt.config.gestalt.core)
@@ -60,9 +57,7 @@ configure<com.diffplug.gradle.spotless.SpotlessExtension> {
     kotlin {
         ktlint()
     }
-    kotlinGradle {
-        ktlint()
-    }
+    kotlinGradle { ktlint() }
 }
 
 configure<com.github.spotbugs.snom.SpotBugsExtension> {
@@ -71,6 +66,7 @@ configure<com.github.spotbugs.snom.SpotBugsExtension> {
     effort = com.github.spotbugs.snom.Effort.MAX
     reportLevel = com.github.spotbugs.snom.Confidence.LOW
 }
+
 tasks.withType<com.github.spotbugs.snom.SpotBugsTask> {
     reports.create("html").required = true
     reports.create("xml").required = true
@@ -85,9 +81,7 @@ fun isNonStable(version: String): Boolean {
 
 // Tells dependency plugin to reject upgrade options if they aren't full releases.
 tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
-    rejectVersionIf {
-        isNonStable(candidate.version) and !isNonStable(currentVersion)
-    }
+    rejectVersionIf { isNonStable(candidate.version) and !isNonStable(currentVersion) }
 }
 
 tasks.jacocoTestReport {
@@ -112,20 +106,15 @@ configure<com.adarshr.gradle.testlogger.TestLoggerExtension> {
     theme = com.adarshr.gradle.testlogger.theme.ThemeType.MOCHA_PARALLEL
 }
 
-tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
-    dependsOn(tasks.spotlessApply)
-}
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { dependsOn(tasks.spotlessApply) }
 
 tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
     archiveBaseName.set("com.yqmonline.txt-man")
     mergeServiceFiles()
 }
+
 tasks.build { dependsOn(tasks.shadowJar) }
 
-val jar by tasks.getting(Jar::class) {
-    manifest.attributes["Main-Class"] = "com.yqmonline.MainKt"
-}
+val jar by tasks.getting(Jar::class) { manifest.attributes["Main-Class"] = "com.yqmonline.MainKt" }
 
-application {
-    mainClass = "com.yqmonline.MainKt"
-}
+application { mainClass = "com.yqmonline.MainKt" }

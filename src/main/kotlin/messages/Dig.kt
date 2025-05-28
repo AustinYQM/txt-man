@@ -4,6 +4,11 @@ import com.yqmonline.extensions.AnyGameEntity
 import com.yqmonline.world.GameContext
 import org.hexworks.amethyst.api.entity.EntityType
 
+/**
+ * @property context
+ * @property source
+ * @property target
+ */
 data class Dig(
     override val context: GameContext,
     override val source: AnyGameEntity,

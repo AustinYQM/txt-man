@@ -37,9 +37,8 @@ class World(
     }
 
     /**
-     * Adds the given [Entity] at the given [Position3D].
-     * Has no effect if this world already contains the
-     * given [Entity].
+     * Adds the given [Entity] at the given [Position3D]. Has no effect if this world already contains the given
+     * [Entity].
      */
     fun addEntity(
         entity: AnyGameEntity,
@@ -47,9 +46,7 @@ class World(
     ) {
         entity.position = position
         engine.addEntity(entity)
-        fetchBlockAt(position).map {
-            it.addEntity(entity)
-        }
+        fetchBlockAt(position).map { it.addEntity(entity) }
     }
 
     fun addAtEmptyPosition(
@@ -57,19 +54,16 @@ class World(
         offset: Position3D = Position3D.create(0, 0, 0),
         size: Size3D = actualSize,
     ): Boolean =
-        findEmptyLocationWithin(offset, size).fold(
-            whenEmpty = {
-                false
-            },
-            whenPresent = { location ->
-                addEntity(entity, location)
-                true
-            },
-        )
+        findEmptyLocationWithin(offset, size)
+            .fold(
+                whenEmpty = { false },
+                whenPresent = { location ->
+                    addEntity(entity, location)
+                    true
+                },
+            )
 
-    /**
-     * Finds an empty location within the given area (offset and size) on this [World].
-     */
+    /** Finds an empty location within the given area (offset and size) on this [World]. */
     fun findEmptyLocationWithin(
         offset: Position3D,
         size: Size3D,
@@ -132,9 +126,7 @@ class World(
     }
 
     fun removeEntity(entity: AnyGameEntity) {
-        fetchBlockAt(entity.position).map {
-            it.removeEntity(entity)
-        }
+        fetchBlockAt(entity.position).map { it.removeEntity(entity) }
         engine.removeEntity(entity)
         entity.position = Position3D.unknown()
     }

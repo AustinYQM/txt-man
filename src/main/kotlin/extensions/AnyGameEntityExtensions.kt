@@ -15,9 +15,7 @@ import kotlin.reflect.KClass
 var AnyGameEntity.position
     get() = tryToFindAttribute(EntityPosition::class).position
     set(value) {
-        findAttribute(EntityPosition::class).map {
-            it.position = value
-        }
+        findAttribute(EntityPosition::class).map { it.position = value }
     }
 
 val AnyGameEntity.tile: Tile
@@ -28,7 +26,8 @@ fun <T : Attribute> AnyGameEntity.tryToFindAttribute(klass: KClass<T>): T =
         NoSuchElementException("Entity '$this' has no property with type '${klass.simpleName}'.")
     }
 
-val AnyGameEntity.occupiesBlock: Boolean get() = findAttribute(BlockOccupier::class).isPresent
+val AnyGameEntity.occupiesBlock: Boolean
+    get() = findAttribute(BlockOccupier::class).isPresent
 
 suspend fun AnyGameEntity.tryActionsOn(
     context: GameContext,

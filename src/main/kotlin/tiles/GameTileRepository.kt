@@ -3,6 +3,7 @@ package com.yqmonline.tiles
 import com.yqmonline.config.GameColors.ACCENT_COLOR
 import com.yqmonline.config.GameColors.FLOOR_BACKGROUND
 import com.yqmonline.config.GameColors.FLOOR_FOREGROUND
+import com.yqmonline.config.GameColors.FUNGUS_COLOR
 import com.yqmonline.config.GameColors.WALL_BACKGROUND
 import com.yqmonline.config.GameColors.WALL_FOREGROUND
 import org.hexworks.zircon.api.data.CharacterTile
@@ -34,5 +35,13 @@ object GameTileRepository {
             .withCharacter('@')
             .withBackgroundColor(FLOOR_BACKGROUND)
             .withForegroundColor(ACCENT_COLOR)
+            .buildCharacterTile()
+
+    val FUNGUS =
+        Tile
+            .newBuilder()
+            .withCharacter('f')
+            .withBackgroundColor(FLOOR_BACKGROUND)
+            .withForegroundColor(FUNGUS_COLOR)
             .buildCharacterTile()
 }

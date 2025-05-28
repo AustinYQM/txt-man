@@ -8,6 +8,7 @@ import org.hexworks.zircon.api.grid.TileGrid
 import org.hexworks.zircon.api.view.base.BaseView
 import kotlin.system.exitProcess
 
+/** @param grid */
 class LoseView(
     private val grid: TileGrid,
 ) : BaseView(grid, GameConfig.THEME) {
@@ -35,13 +36,9 @@ class LoseView(
                 .withDecorations(box())
                 .build()
 
-        restartButton.onActivated {
-            replaceWith(PlayView(grid))
-        }
+        restartButton.onActivated { replaceWith(PlayView(grid)) }
 
-        exitButton.onActivated {
-            exitProcess(0)
-        }
+        exitButton.onActivated { exitProcess(0) }
 
         screen.addComponents(header, restartButton, exitButton)
     }

@@ -15,17 +15,12 @@ object CameraMover : MessageFacet<MoveCamera>(MoveCamera::class) {
         val halfWidth = world.visibleSize.xLength / 2
         val currentPosition = source.position
         when {
-            previousPosition.y > currentPosition.y && screenPos.y < halfHeight -> {
-                world.scrollOneBackward()
-            }
-            previousPosition.y < currentPosition.y && screenPos.y > halfHeight -> {
-                world.scrollOneForward()
-            }
-            previousPosition.x > currentPosition.x && screenPos.x < halfWidth -> {
-                world.scrollOneLeft()
-            }
-            previousPosition.x < currentPosition.x && screenPos.x > halfWidth -> {
-                world.scrollOneRight()
+            previousPosition.y > currentPosition.y && screenPos.y < halfHeight -> world.scrollOneBackward()
+            previousPosition.y < currentPosition.y && screenPos.y > halfHeight -> world.scrollOneForward()
+            previousPosition.x > currentPosition.x && screenPos.x < halfWidth -> world.scrollOneLeft()
+            previousPosition.x < currentPosition.x && screenPos.x > halfWidth -> world.scrollOneRight()
+            else -> {
+                // this is a generated else block
             }
         }
         return Consumed

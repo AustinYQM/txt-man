@@ -20,6 +20,11 @@ import org.hexworks.zircon.api.uievent.Processed
 import org.hexworks.zircon.api.view.base.BaseView
 import org.hexworks.zircon.internal.game.impl.GameAreaComponentRenderer
 
+/**
+ * @param grid
+ * @param game
+ * @param theme
+ */
 class PlayView(
     private val grid: TileGrid,
     private val game: Game = GameBuilder.create(),
