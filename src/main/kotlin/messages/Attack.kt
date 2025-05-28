@@ -1,8 +1,8 @@
 package com.yqmonline.messages
 
-import com.yqmonline.extensions.AnyGameEntity
+import com.yqmonline.attributes.types.Combatant
+import com.yqmonline.extensions.GameEntity
 import com.yqmonline.world.GameContext
-import org.hexworks.amethyst.api.entity.EntityType
 
 /**
  * @property context
@@ -11,6 +11,6 @@ import org.hexworks.amethyst.api.entity.EntityType
  */
 data class Attack(
     override val context: GameContext,
-    override val source: AnyGameEntity,
-    override val target: AnyGameEntity,
-) : EntityAction<EntityType, EntityType>
+    override val source: GameEntity<Combatant>,
+    override val target: GameEntity<Combatant>,
+) : EntityAction<Combatant, Combatant>

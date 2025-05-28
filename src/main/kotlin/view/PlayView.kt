@@ -5,10 +5,13 @@ import com.yqmonline.config.GameConfig.LOG_AREA_HEIGHT
 import com.yqmonline.config.GameConfig.SIDEBAR_WIDTH
 import com.yqmonline.config.GameConfig.WINDOW_HEIGHT
 import com.yqmonline.config.GameConfig.WINDOW_WIDTH
+import com.yqmonline.events.GameLogEvent
 import com.yqmonline.tiles.GameTileRepository.FLOOR
 import com.yqmonline.world.Game
 import com.yqmonline.world.GameBuilder
 import org.hexworks.cobalt.databinding.api.extension.toProperty
+import org.hexworks.cobalt.events.api.KeepSubscription
+import org.hexworks.cobalt.events.api.subscribeTo
 import org.hexworks.zircon.api.ComponentDecorations.box
 import org.hexworks.zircon.api.Components
 import org.hexworks.zircon.api.component.ColorTheme
@@ -18,6 +21,7 @@ import org.hexworks.zircon.api.grid.TileGrid
 import org.hexworks.zircon.api.uievent.KeyboardEventType
 import org.hexworks.zircon.api.uievent.Processed
 import org.hexworks.zircon.api.view.base.BaseView
+import org.hexworks.zircon.internal.Zircon
 import org.hexworks.zircon.internal.game.impl.GameAreaComponentRenderer
 
 /**
@@ -65,5 +69,14 @@ class PlayView(
         }
 
         screen.addComponents(sidebar, logArea, gameComponent)
+
+        Zircon.eventBus.subscribeTo<GameLogEvent> { (text) ->
+            logArea.addParagraph(
+                paragraph = text,
+                withNewLine = false,
+                withTypingEffectSpeedInMs = 10,
+            )
+            KeepSubscription
+        }
     }
 }

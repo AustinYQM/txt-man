@@ -4,6 +4,7 @@ import com.yqmonline.attributes.BlockOccupier
 import com.yqmonline.attributes.EntityActions
 import com.yqmonline.attributes.EntityPosition
 import com.yqmonline.attributes.EntityTile
+import com.yqmonline.entities.Player
 import com.yqmonline.world.GameContext
 import org.hexworks.amethyst.api.Attribute
 import org.hexworks.amethyst.api.Consumed
@@ -28,6 +29,8 @@ fun <T : Attribute> AnyGameEntity.tryToFindAttribute(klass: KClass<T>): T =
 
 val AnyGameEntity.occupiesBlock: Boolean
     get() = findAttribute(BlockOccupier::class).isPresent
+
+val AnyGameEntity.isPlayer: Boolean get() = this.type == Player
 
 suspend fun AnyGameEntity.tryActionsOn(
     context: GameContext,
