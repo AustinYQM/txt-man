@@ -1,5 +1,6 @@
 package com.yqmonline.world
 
+import com.yqmonline.config.GameConfig.BATS_PER_LEVEL
 import com.yqmonline.config.GameConfig.DUNGEON_LEVELS
 import com.yqmonline.config.GameConfig.FUNGI_PER_LEVEL
 import com.yqmonline.config.GameConfig.LOG_AREA_HEIGHT
@@ -33,6 +34,7 @@ class GameBuilder(
         prepareWorld()
         val player = addPlayer()
         addFungi()
+        addBats()
 
         world.addWorldEntity(EntityFactory.newFogOfWar())
 
@@ -54,6 +56,15 @@ class GameBuilder(
         also {
             repeat(world.actualSize.zLength) { level ->
                 repeat(FUNGI_PER_LEVEL) { EntityFactory.newFungus().addToWorld(level) }
+            }
+        }
+
+    private fun addBats() =
+        also {
+            repeat(world.actualSize.zLength) { level ->
+                repeat(BATS_PER_LEVEL) {
+                    EntityFactory.newBat().addToWorld(level)
+                }
             }
         }
 

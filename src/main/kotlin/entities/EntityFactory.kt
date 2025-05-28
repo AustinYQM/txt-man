@@ -20,6 +20,8 @@ import com.yqmonline.systems.InputReceiver
 import com.yqmonline.systems.Movable
 import com.yqmonline.systems.StairClimber
 import com.yqmonline.systems.StairDescender
+import com.yqmonline.systems.Wanderer
+import com.yqmonline.tiles.GameTileRepository.BAT
 import com.yqmonline.tiles.GameTileRepository.FUNGUS
 import com.yqmonline.tiles.GameTileRepository.PLAYER
 import com.yqmonline.tiles.GameTileRepository.STAIRS_DOWN
@@ -40,13 +42,14 @@ object EntityFactory {
         newGameEntityOfType(Player) {
             attributes(
                 EntityPosition(),
+                BlockOccupier,
                 EntityTile(PLAYER),
                 EntityActions(Dig::class, Attack::class),
                 CombatStats.create(maxHp = 100, attackValue = 10, defenseValue = 5),
                 Vision(9),
             )
             behaviors(InputReceiver)
-            facets(Movable, CameraMover, StairClimber, StairDescender)
+            facets(Movable, CameraMover, StairClimber, StairDescender, Attackable, Destructible)
         }
 
     fun newWall() =
@@ -96,5 +99,22 @@ object EntityFactory {
     fun newFogOfWar() =
         newGameEntityOfType(FOW) {
             behaviors(FogOfWar)
+        }
+
+    fun newBat() =
+        newGameEntityOfType(Bat) {
+            attributes(
+                BlockOccupier,
+                EntityPosition(),
+                EntityTile(BAT),
+                CombatStats.create(
+                    maxHp = 5,
+                    attackValue = 2,
+                    defenseValue = 1,
+                ),
+                EntityActions(Attack::class),
+            )
+            facets(Movable, Attackable, Destructible)
+            behaviors(Wanderer)
         }
 }

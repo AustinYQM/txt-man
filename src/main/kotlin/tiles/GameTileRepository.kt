@@ -1,6 +1,7 @@
 package com.yqmonline.tiles
 
 import com.yqmonline.config.GameColors.ACCENT_COLOR
+import com.yqmonline.config.GameColors.BAT_COLOR
 import com.yqmonline.config.GameColors.FLOOR_BACKGROUND
 import com.yqmonline.config.GameColors.FLOOR_FOREGROUND
 import com.yqmonline.config.GameColors.FUNGUS_COLOR
@@ -67,5 +68,13 @@ object GameTileRepository {
             .newBuilder()
             .withCharacter(' ')
             .withBackgroundColor(UNREVEALED_COLOR)
+            .buildCharacterTile()
+
+    val BAT =
+        Tile
+            .newBuilder()
+            .withCharacter('b')
+            .withBackgroundColor(FLOOR_BACKGROUND)
+            .withForegroundColor(BAT_COLOR)
             .buildCharacterTile()
 }

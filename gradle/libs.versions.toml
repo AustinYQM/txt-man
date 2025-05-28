@@ -3,7 +3,7 @@ org-slf4j = "2.0.17"
 org-hexworks-zircon = "2020.2.0-RELEASE"
 ch-qos-logback = "1.5.18"
 com-github-gastalt-config = "0.35.7"
-org-hexworks-amethyst = "2020.1.1-RELEASE"
+org-hexworks-amethyst = "2021.0.1-RELEASE"
 #org-hexworks-cobalt = "2022.1.0-RELEASE"
 
 [libraries]
