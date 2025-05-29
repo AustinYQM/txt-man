@@ -12,7 +12,7 @@ plugins {
     alias(libs.plugins.nl.littlerobots.version.catalog.update)
     alias(libs.plugins.com.adarshr.test.logger)
     alias(libs.plugins.io.freefair.lombok)
-    alias(libs.plugins.com.gradleup.shadow)
+    // alias(libs.plugins.com.gradleup.shadow)
 }
 
 group = "com.yqmonline"
@@ -25,7 +25,7 @@ repositories { mavenCentral() }
 
 dependencies {
     constraints {
-        implementation(libs.org.yaml.snakeyaml) { because("Shit is super borked") }
+        // implementation(libs.org.yaml.snakeyaml) { because("Shit is super borked") }
         implementation(libs.com.github.ben.manes.caffeine.caffeine)
         implementation(libs.ch.qos.logback.logback.classic)
         implementation(libs.ch.qos.logback.logback.core)
@@ -36,9 +36,9 @@ dependencies {
     //    implementation(libs.org.hexworks.cobalt.cobalt.core.jvm)
     implementation(libs.org.slf4j.slf4j.api)
 
-    implementation(libs.com.github.gestalt.config.gestalt.core)
-    implementation(libs.com.github.gestalt.config.gestalt.kotlin)
-    implementation(libs.com.github.gestalt.config.gestalt.yaml)
+    // implementation(libs.com.github.gestalt.config.gestalt.core)
+    // implementation(libs.com.github.gestalt.config.gestalt.kotlin)
+    // implementation(libs.com.github.gestalt.config.gestalt.yaml)
 
     testImplementation(kotlin("test"))
     testImplementation(libs.org.junit.jupiter.junit.jupiter.api)
@@ -108,13 +108,13 @@ configure<com.adarshr.gradle.testlogger.TestLoggerExtension> {
 
 tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> { dependsOn(tasks.spotlessApply) }
 
-tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
-    archiveBaseName.set("com.yqmonline.txt-man")
-    mergeServiceFiles()
-}
+// tasks.withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
+//    archiveBaseName.set("com.yqmonline.txt-man")
+//    mergeServiceFiles()
+// }
 
-tasks.build { dependsOn(tasks.shadowJar) }
+// tasks.build { dependsOn(tasks.shadowJar) }
 
-val jar by tasks.getting(Jar::class) { manifest.attributes["Main-Class"] = "com.yqmonline.MainKt" }
+// val jar by tasks.getting(Jar::class) { manifest.attributes["Main-Class"] = "com.yqmonline.MainKt" }
 
 application { mainClass = "com.yqmonline.MainKt" }

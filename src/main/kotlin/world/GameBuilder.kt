@@ -4,6 +4,7 @@ import com.yqmonline.config.GameConfig.BATS_PER_LEVEL
 import com.yqmonline.config.GameConfig.DUNGEON_LEVELS
 import com.yqmonline.config.GameConfig.FUNGI_PER_LEVEL
 import com.yqmonline.config.GameConfig.LOG_AREA_HEIGHT
+import com.yqmonline.config.GameConfig.ROCKS_PER_LEVEL
 import com.yqmonline.config.GameConfig.SIDEBAR_WIDTH
 import com.yqmonline.config.GameConfig.WINDOW_HEIGHT
 import com.yqmonline.config.GameConfig.WINDOW_WIDTH
@@ -35,6 +36,7 @@ class GameBuilder(
         val player = addPlayer()
         addFungi()
         addBats()
+        addRocks()
 
         world.addWorldEntity(EntityFactory.newFogOfWar())
 
@@ -64,6 +66,15 @@ class GameBuilder(
             repeat(world.actualSize.zLength) { level ->
                 repeat(BATS_PER_LEVEL) {
                     EntityFactory.newBat().addToWorld(level)
+                }
+            }
+        }
+
+    private fun addRocks() =
+        also {
+            repeat(world.actualSize.zLength) { level ->
+                repeat(ROCKS_PER_LEVEL) {
+                    EntityFactory.newRock().addToWorld(level)
                 }
             }
         }

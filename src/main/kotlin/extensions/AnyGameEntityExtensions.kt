@@ -11,8 +11,10 @@ import org.hexworks.amethyst.api.Attribute
 import org.hexworks.amethyst.api.Consumed
 import org.hexworks.amethyst.api.Pass
 import org.hexworks.amethyst.api.Response
+import org.hexworks.amethyst.api.entity.EntityType
 import org.hexworks.zircon.api.data.Tile
 import kotlin.reflect.KClass
+import kotlin.reflect.full.isSuperclassOf
 
 var AnyGameEntity.position
     get() = tryToFindAttribute(EntityPosition::class).position
@@ -51,3 +53,6 @@ suspend fun AnyGameEntity.tryActionsOn(
 
 val AnyGameEntity.blocksVision: Boolean
     get() = this.findAttribute(VisionBlocker::class).isPresent
+
+inline fun <reified T : EntityType> Iterable<AnyGameEntity>.filterType(): List<AnyGameEntity> =
+    filter { T::class.isSuperclassOf(it.type::class) }.toList()

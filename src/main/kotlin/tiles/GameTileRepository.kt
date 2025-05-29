@@ -5,6 +5,7 @@ import com.yqmonline.config.GameColors.BAT_COLOR
 import com.yqmonline.config.GameColors.FLOOR_BACKGROUND
 import com.yqmonline.config.GameColors.FLOOR_FOREGROUND
 import com.yqmonline.config.GameColors.FUNGUS_COLOR
+import com.yqmonline.config.GameColors.ROCK_COLOR
 import com.yqmonline.config.GameColors.UNREVEALED_COLOR
 import com.yqmonline.config.GameColors.WALL_BACKGROUND
 import com.yqmonline.config.GameColors.WALL_FOREGROUND
@@ -76,5 +77,13 @@ object GameTileRepository {
             .withCharacter('b')
             .withBackgroundColor(FLOOR_BACKGROUND)
             .withForegroundColor(BAT_COLOR)
+            .buildCharacterTile()
+
+    val ROCK =
+        Tile
+            .newBuilder()
+            .withCharacter(',')
+            .withBackgroundColor(FLOOR_BACKGROUND)
+            .withForegroundColor(ROCK_COLOR)
             .buildCharacterTile()
 }

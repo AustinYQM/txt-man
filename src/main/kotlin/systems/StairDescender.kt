@@ -1,7 +1,7 @@
 package com.yqmonline.systems
 
 import com.yqmonline.blocks.GameBlock
-import com.yqmonline.entities.StairsDown
+import com.yqmonline.entities.terrain.StairsDown
 import com.yqmonline.events.logGameEvent
 import com.yqmonline.extensions.MessageFacet
 import com.yqmonline.extensions.position
