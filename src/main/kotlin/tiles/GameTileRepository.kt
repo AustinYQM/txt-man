@@ -1,5 +1,6 @@
 package com.yqmonline.tiles
 
+import com.yqmonline.config.GameColors
 import com.yqmonline.config.GameColors.ACCENT_COLOR
 import com.yqmonline.config.GameColors.BAT_COLOR
 import com.yqmonline.config.GameColors.BAT_MEAT_COLOR
@@ -10,6 +11,7 @@ import com.yqmonline.config.GameColors.ROCK_COLOR
 import com.yqmonline.config.GameColors.UNREVEALED_COLOR
 import com.yqmonline.config.GameColors.WALL_BACKGROUND
 import com.yqmonline.config.GameColors.WALL_FOREGROUND
+import org.hexworks.zircon.api.color.ANSITileColor
 import org.hexworks.zircon.api.data.CharacterTile
 import org.hexworks.zircon.api.data.Tile
 import org.hexworks.zircon.api.graphics.Symbols
@@ -94,5 +96,69 @@ object GameTileRepository {
             .withCharacter('m')
             .withBackgroundColor(FLOOR_BACKGROUND)
             .withForegroundColor(BAT_MEAT_COLOR)
+            .buildCharacterTile()
+
+    val CLUB =
+        Tile
+            .newBuilder()
+            .withCharacter('(')
+            .withForegroundColor(ANSITileColor.GRAY)
+            .withBackgroundColor(GameColors.FLOOR_BACKGROUND)
+            .buildCharacterTile()
+
+    val DAGGER =
+        Tile
+            .newBuilder()
+            .withCharacter('(')
+            .withForegroundColor(ANSITileColor.WHITE)
+            .withBackgroundColor(GameColors.FLOOR_BACKGROUND)
+            .buildCharacterTile()
+
+    val SWORD =
+        Tile
+            .newBuilder()
+            .withCharacter('(')
+            .withForegroundColor(ANSITileColor.BRIGHT_WHITE)
+            .withBackgroundColor(GameColors.FLOOR_BACKGROUND)
+            .buildCharacterTile()
+
+    val STAFF =
+        Tile
+            .newBuilder()
+            .withCharacter('(')
+            .withForegroundColor(ANSITileColor.YELLOW)
+            .withBackgroundColor(GameColors.FLOOR_BACKGROUND)
+            .buildCharacterTile()
+
+    val JACKET =
+        Tile
+            .newBuilder()
+            .withCharacter('[')
+            .withForegroundColor(ANSITileColor.GRAY)
+            .withBackgroundColor(GameColors.FLOOR_BACKGROUND)
+            .buildCharacterTile()
+
+    val LIGHT_ARMOR =
+        Tile
+            .newBuilder()
+            .withCharacter('[')
+            .withForegroundColor(ANSITileColor.GREEN)
+            .withBackgroundColor(GameColors.FLOOR_BACKGROUND)
+            .buildCharacterTile()
+
+    val MEDIUM_ARMOR =
+        Tile
+            .newBuilder()
+            .withCharacter('[')
+            .withForegroundColor(ANSITileColor.WHITE)
+            .withBackgroundColor(GameColors.FLOOR_BACKGROUND)
+            .buildCharacterTile()
+
+    val HEAVY_ARMOR =
+        Tile
+            .newBuilder()
+            .withCharacter('[')
+            .withForegroundColor(ANSITileColor.BRIGHT_WHITE)
+            .withBackgroundColor(GameColors.FLOOR_BACKGROUND)
             .buildCharacterTile()
 }

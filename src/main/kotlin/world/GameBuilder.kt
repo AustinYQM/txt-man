@@ -1,11 +1,13 @@
 package com.yqmonline.world
 
+import com.yqmonline.config.GameConfig.ARMOR_PER_LEVEL
 import com.yqmonline.config.GameConfig.BATS_PER_LEVEL
 import com.yqmonline.config.GameConfig.DUNGEON_LEVELS
 import com.yqmonline.config.GameConfig.FUNGI_PER_LEVEL
 import com.yqmonline.config.GameConfig.LOG_AREA_HEIGHT
 import com.yqmonline.config.GameConfig.ROCKS_PER_LEVEL
 import com.yqmonline.config.GameConfig.SIDEBAR_WIDTH
+import com.yqmonline.config.GameConfig.WEAPONS_PER_LEVEL
 import com.yqmonline.config.GameConfig.WINDOW_HEIGHT
 import com.yqmonline.config.GameConfig.WINDOW_WIDTH
 import com.yqmonline.config.GameConfig.WORLD_SIZE
@@ -37,6 +39,9 @@ class GameBuilder(
         addFungi()
         addBats()
         addRocks()
+
+        addWeapons()
+        addArmor()
 
         world.addWorldEntity(EntityFactory.newFogOfWar())
 
@@ -97,4 +102,22 @@ class GameBuilder(
                 worldSize = WORLD_SIZE,
             ).buildGame()
     }
+
+    private fun addWeapons() =
+        also {
+            repeat(world.actualSize.zLength) { level ->
+                repeat(WEAPONS_PER_LEVEL) {
+                    EntityFactory.newRandomWeapon().addToWorld(level)
+                }
+            }
+        }
+
+    private fun addArmor() =
+        also {
+            repeat(world.actualSize.zLength) { level ->
+                repeat(ARMOR_PER_LEVEL) {
+                    EntityFactory.newRandomArmor().addToWorld(level)
+                }
+            }
+        }
 }

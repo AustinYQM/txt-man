@@ -23,6 +23,9 @@ object GameConfig {
     const val BATS_PER_LEVEL = 25
     const val ROCKS_PER_LEVEL = 20
 
+    const val WEAPONS_PER_LEVEL = 3
+    const val ARMOR_PER_LEVEL = 3
+
     val WORLD_SIZE = Size3D.create(WINDOW_WIDTH * 2, WINDOW_HEIGHT * 2, DUNGEON_LEVELS)
     val GAME_AREA_SIZE =
         Size3D.create(

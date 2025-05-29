@@ -1,9 +1,12 @@
 package com.yqmonline.extensions
 
 import com.yqmonline.attributes.BlockOccupier
+import com.yqmonline.attributes.CombatStats
 import com.yqmonline.attributes.EntityActions
 import com.yqmonline.attributes.EntityPosition
 import com.yqmonline.attributes.EntityTile
+import com.yqmonline.attributes.Equipment
+import com.yqmonline.attributes.ItemCombatStats
 import com.yqmonline.attributes.VisionBlocker
 import com.yqmonline.entities.Player
 import com.yqmonline.world.GameContext
@@ -63,3 +66,19 @@ inline fun <reified T : EntityType> AnyGameEntity.whenTypeIs(fn: (GameEntity<T>)
         fn(this as GameEntity<T>)
     }
 }
+
+val AnyGameEntity.attackValue: Int
+    get() {
+        val combat = findAttribute(CombatStats::class).map { it.attackValue }.orElse(0)
+        val equipment = findAttribute(Equipment::class).map { it.attackValue }.orElse(0)
+        val item = findAttribute(ItemCombatStats::class).map { it.attackValue }.orElse(0)
+        return combat + equipment + item
+    }
+
+val AnyGameEntity.defenseValue: Int
+    get() {
+        val combat = findAttribute(CombatStats::class).map { it.defenseValue }.orElse(0)
+        val equipment = findAttribute(Equipment::class).map { it.defenseValue }.orElse(0)
+        val item = findAttribute(ItemCombatStats::class).map { it.defenseValue }.orElse(0)
+        return combat + equipment + item
+    }

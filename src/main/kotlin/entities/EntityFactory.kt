@@ -6,17 +6,30 @@ import com.yqmonline.attributes.EnergyLevel
 import com.yqmonline.attributes.EntityActions
 import com.yqmonline.attributes.EntityPosition
 import com.yqmonline.attributes.EntityTile
+import com.yqmonline.attributes.Equipment
 import com.yqmonline.attributes.FungusSpread
 import com.yqmonline.attributes.Inventory
+import com.yqmonline.attributes.ItemCombatStats
 import com.yqmonline.attributes.ItemIcon
 import com.yqmonline.attributes.NutritionalValue
 import com.yqmonline.attributes.Vision
 import com.yqmonline.attributes.VisionBlocker
+import com.yqmonline.attributes.types.Armor
+import com.yqmonline.attributes.types.Weapon
 import com.yqmonline.entities.items.BatMeat
+import com.yqmonline.entities.items.Club
+import com.yqmonline.entities.items.Dagger
+import com.yqmonline.entities.items.HeavyArmor
+import com.yqmonline.entities.items.Jacket
+import com.yqmonline.entities.items.LightArmor
+import com.yqmonline.entities.items.MediumArmor
 import com.yqmonline.entities.items.Rock
+import com.yqmonline.entities.items.Staff
+import com.yqmonline.entities.items.Sword
 import com.yqmonline.entities.terrain.StairsDown
 import com.yqmonline.entities.terrain.StairsUp
 import com.yqmonline.entities.terrain.Wall
+import com.yqmonline.extensions.GameEntity
 import com.yqmonline.messages.Attack
 import com.yqmonline.messages.Dig
 import com.yqmonline.systems.Attackable
@@ -36,6 +49,7 @@ import com.yqmonline.systems.Movable
 import com.yqmonline.systems.StairClimber
 import com.yqmonline.systems.StairDescender
 import com.yqmonline.systems.Wanderer
+import com.yqmonline.tiles.GameTileRepository
 import com.yqmonline.tiles.GameTileRepository.BAT
 import com.yqmonline.tiles.GameTileRepository.BAT_MEAT
 import com.yqmonline.tiles.GameTileRepository.FUNGUS
@@ -72,6 +86,10 @@ object EntityFactory {
                 Vision(9),
                 Inventory(10),
                 EnergyLevel(1000, 1000),
+                Equipment(
+                    initialWeapon = newClub(),
+                    initialArmor = newJacket(),
+                ),
             )
             behaviors(InputReceiver, EnergyExpender)
             facets(
@@ -186,5 +204,166 @@ object EntityFactory {
                 EntityPosition(),
                 EntityTile(BAT_MEAT),
             )
+        }
+
+    fun newDagger() =
+        newGameEntityOfType(Dagger) {
+            attributes(
+                ItemIcon(
+                    Tile
+                        .newBuilder()
+                        .withName("Dagger")
+                        .withTileset(GraphicalTilesetResources.nethack16x16())
+                        .buildGraphicalTile(),
+                ),
+                EntityPosition(),
+                ItemCombatStats(
+                    attackValue = 4,
+                    combatItemType = "Weapon",
+                ),
+                EntityTile(GameTileRepository.DAGGER),
+            )
+        }
+
+    fun newSword() =
+        newGameEntityOfType(Sword) {
+            attributes(
+                ItemIcon(
+                    Tile
+                        .newBuilder()
+                        .withName("Short sword")
+                        .withTileset(GraphicalTilesetResources.nethack16x16())
+                        .buildGraphicalTile(),
+                ),
+                EntityPosition(),
+                ItemCombatStats(
+                    attackValue = 6,
+                    combatItemType = "Weapon",
+                ),
+                EntityTile(GameTileRepository.SWORD),
+            )
+        }
+
+    fun newStaff() =
+        newGameEntityOfType(Staff) {
+            attributes(
+                ItemIcon(
+                    Tile
+                        .newBuilder()
+                        .withName("staff")
+                        .withTileset(GraphicalTilesetResources.nethack16x16())
+                        .buildGraphicalTile(),
+                ),
+                EntityPosition(),
+                ItemCombatStats(
+                    attackValue = 4,
+                    defenseValue = 2,
+                    combatItemType = "Weapon",
+                ),
+                EntityTile(GameTileRepository.STAFF),
+            )
+        }
+
+    fun newLightArmor() =
+        newGameEntityOfType(LightArmor) {
+            attributes(
+                ItemIcon(
+                    Tile
+                        .newBuilder()
+                        .withName("Leather armor")
+                        .withTileset(GraphicalTilesetResources.nethack16x16())
+                        .buildGraphicalTile(),
+                ),
+                EntityPosition(),
+                ItemCombatStats(
+                    defenseValue = 2,
+                    combatItemType = "Armor",
+                ),
+                EntityTile(GameTileRepository.LIGHT_ARMOR),
+            )
+        }
+
+    fun newMediumArmor() =
+        newGameEntityOfType(MediumArmor) {
+            attributes(
+                ItemIcon(
+                    Tile
+                        .newBuilder()
+                        .withName("Chain mail")
+                        .withTileset(GraphicalTilesetResources.nethack16x16())
+                        .buildGraphicalTile(),
+                ),
+                EntityPosition(),
+                ItemCombatStats(
+                    defenseValue = 3,
+                    combatItemType = "Armor",
+                ),
+                EntityTile(GameTileRepository.MEDIUM_ARMOR),
+            )
+        }
+
+    fun newHeavyArmor() =
+        newGameEntityOfType(HeavyArmor) {
+            attributes(
+                ItemIcon(
+                    Tile
+                        .newBuilder()
+                        .withName("Plate mail")
+                        .withTileset(GraphicalTilesetResources.nethack16x16())
+                        .buildGraphicalTile(),
+                ),
+                EntityPosition(),
+                ItemCombatStats(
+                    defenseValue = 4,
+                    combatItemType = "Armor",
+                ),
+                EntityTile(GameTileRepository.HEAVY_ARMOR),
+            )
+        }
+
+    fun newClub() =
+        newGameEntityOfType(Club) {
+            attributes(
+                ItemCombatStats(combatItemType = "Weapon"),
+                EntityTile(GameTileRepository.CLUB),
+                EntityPosition(),
+                ItemIcon(
+                    Tile
+                        .newBuilder()
+                        .withName("Club")
+                        .withTileset(GraphicalTilesetResources.nethack16x16())
+                        .buildGraphicalTile(),
+                ),
+            )
+        }
+
+    fun newJacket() =
+        newGameEntityOfType(Jacket) {
+            attributes(
+                ItemCombatStats(combatItemType = "Armor"),
+                EntityTile(GameTileRepository.JACKET),
+                EntityPosition(),
+                ItemIcon(
+                    Tile
+                        .newBuilder()
+                        .withName("Leather jacket")
+                        .withTileset(GraphicalTilesetResources.nethack16x16())
+                        .buildGraphicalTile(),
+                ),
+            )
+        }
+
+    fun newRandomWeapon(): GameEntity<Weapon> =
+        when (Random.nextInt(3)) {
+            0 -> newDagger()
+            1 -> newSword()
+            else -> newStaff()
+        }
+
+    fun newRandomArmor(): GameEntity<Armor> =
+        when (Random.nextInt(3)) {
+            0 -> newLightArmor()
+            1 -> newMediumArmor()
+            else -> newHeavyArmor()
         }
 }

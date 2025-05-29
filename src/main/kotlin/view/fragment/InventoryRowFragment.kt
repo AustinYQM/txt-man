@@ -1,5 +1,6 @@
 package com.yqmonline.view.fragment
 
+import com.yqmonline.attributes.types.CombatItem
 import com.yqmonline.attributes.types.Food
 import com.yqmonline.attributes.types.iconTile
 import com.yqmonline.extensions.GameItem
@@ -25,6 +26,13 @@ class InventoryRowFragment(
             .withText("Eat")
             .build()
 
+    val equipButton =
+        Components
+            .button()
+            .withDecorations()
+            .withText("Equip")
+            .build()
+
     override val root =
         Components
             .hbox()
@@ -47,5 +55,6 @@ class InventoryRowFragment(
                 )
                 addComponent(dropButton)
                 item.whenTypeIs<Food> { addComponent(eatButton) }
+                item.whenTypeIs<CombatItem> { addComponent(equipButton) }
             }
 }

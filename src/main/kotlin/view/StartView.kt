@@ -13,7 +13,7 @@ class StartView(
     private val grid: TileGrid,
 ) : BaseView(grid, GameConfig.THEME) {
     init {
-        val msg = "Welcome to TXT Man!"
+        val msg = "Welcome to Gwendolyn's Cave Adventure!"
 
         val header =
             Components

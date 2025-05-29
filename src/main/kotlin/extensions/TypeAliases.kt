@@ -1,5 +1,7 @@
 package com.yqmonline.extensions
 
+import com.yqmonline.attributes.types.CombatItem
+import com.yqmonline.attributes.types.EquipmentHolder
 import com.yqmonline.attributes.types.Item
 import com.yqmonline.attributes.types.ItemHolder
 import com.yqmonline.world.GameContext
@@ -19,3 +21,7 @@ typealias MessageFacet<T> = BaseFacet<GameContext, T>
 typealias GameItem = GameEntity<Item>
 
 typealias GameItemHolder = GameEntity<ItemHolder>
+
+typealias GameCombatItem = GameEntity<CombatItem>
+
+typealias GameEquipmentHolder = GameEntity<EquipmentHolder>

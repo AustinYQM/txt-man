@@ -3,6 +3,8 @@ package com.yqmonline.systems
 import com.yqmonline.attributes.types.combatStats
 import com.yqmonline.events.logGameEvent
 import com.yqmonline.extensions.MessageFacet
+import com.yqmonline.extensions.attackValue
+import com.yqmonline.extensions.defenseValue
 import com.yqmonline.extensions.hasNoHealthLeft
 import com.yqmonline.extensions.isPlayer
 import com.yqmonline.messages.Attack
@@ -17,7 +19,7 @@ object Attackable : MessageFacet<Attack>(Attack::class) {
         val (context, attacker, target) = message
 
         return if (attacker.isPlayer || target.isPlayer) {
-            val damage = max(0, attacker.combatStats.attackValue - target.combatStats.defenseValue)
+            val damage = max(0, attacker.attackValue - target.defenseValue)
             val finalDamage = (Math.random() * damage).toInt() + 1
             target.combatStats.hp -= finalDamage
 
