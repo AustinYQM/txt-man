@@ -2,6 +2,7 @@ package com.yqmonline.tiles
 
 import com.yqmonline.config.GameColors.ACCENT_COLOR
 import com.yqmonline.config.GameColors.BAT_COLOR
+import com.yqmonline.config.GameColors.BAT_MEAT_COLOR
 import com.yqmonline.config.GameColors.FLOOR_BACKGROUND
 import com.yqmonline.config.GameColors.FLOOR_FOREGROUND
 import com.yqmonline.config.GameColors.FUNGUS_COLOR
@@ -85,5 +86,13 @@ object GameTileRepository {
             .withCharacter(',')
             .withBackgroundColor(FLOOR_BACKGROUND)
             .withForegroundColor(ROCK_COLOR)
+            .buildCharacterTile()
+
+    val BAT_MEAT =
+        Tile
+            .newBuilder()
+            .withCharacter('m')
+            .withBackgroundColor(FLOOR_BACKGROUND)
+            .withForegroundColor(BAT_MEAT_COLOR)
             .buildCharacterTile()
 }

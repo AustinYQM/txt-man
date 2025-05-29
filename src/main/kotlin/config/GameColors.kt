@@ -15,6 +15,7 @@ object GameColors {
     val FUNGUS_COLOR = TileColor.fromString("#85DD1B")
     val BAT_COLOR = TileColor.fromString("#2348B2")
     val ROCK_COLOR = TileColor.fromString("#DDDDDD")
+    val BAT_MEAT_COLOR = TileColor.fromString("#EA4861")
 
     // Vision
     val UNREVEALED_COLOR = TileColor.fromString("#090909")

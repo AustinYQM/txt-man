@@ -25,7 +25,7 @@ repositories { mavenCentral() }
 
 dependencies {
     constraints {
-        // implementation(libs.org.yaml.snakeyaml) { because("Shit is super borked") }
+        implementation(libs.org.yaml.snakeyaml) { because("Shit is super borked") }
         implementation(libs.com.github.ben.manes.caffeine.caffeine)
         implementation(libs.ch.qos.logback.logback.classic)
         implementation(libs.ch.qos.logback.logback.core)

@@ -20,7 +20,7 @@ object GameConfig {
 
     const val FUNGI_PER_LEVEL = 15
     const val MAXIMUM_FUNGUS_SPREAD = 20
-    const val BATS_PER_LEVEL = 10
+    const val BATS_PER_LEVEL = 25
     const val ROCKS_PER_LEVEL = 20
 
     val WORLD_SIZE = Size3D.create(WINDOW_WIDTH * 2, WINDOW_HEIGHT * 2, DUNGEON_LEVELS)

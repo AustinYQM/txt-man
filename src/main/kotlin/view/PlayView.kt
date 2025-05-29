@@ -7,6 +7,7 @@ import com.yqmonline.config.GameConfig.WINDOW_HEIGHT
 import com.yqmonline.config.GameConfig.WINDOW_WIDTH
 import com.yqmonline.events.GameLogEvent
 import com.yqmonline.tiles.GameTileRepository.FLOOR
+import com.yqmonline.view.fragment.PlayerStatsFragment
 import com.yqmonline.world.Game
 import com.yqmonline.world.GameBuilder
 import org.hexworks.cobalt.databinding.api.extension.toProperty
@@ -43,6 +44,13 @@ class PlayView(
                 .withSize(SIDEBAR_WIDTH, WINDOW_HEIGHT)
                 .withDecorations(box())
                 .build()
+
+        sidebar.addFragment(
+            PlayerStatsFragment(
+                width = sidebar.contentSize.width,
+                player = game.player,
+            ),
+        )
 
         val logArea =
             Components

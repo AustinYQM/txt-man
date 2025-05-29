@@ -1,10 +1,11 @@
 package com.yqmonline.view.fragment
 
+import com.yqmonline.attributes.types.Food
 import com.yqmonline.attributes.types.iconTile
 import com.yqmonline.extensions.GameItem
+import com.yqmonline.extensions.whenTypeIs
 import org.hexworks.zircon.api.Components
 import org.hexworks.zircon.api.component.Fragment
-import org.hexworks.zircon.api.graphics.Symbols
 
 class InventoryRowFragment(
     width: Int,
@@ -13,8 +14,15 @@ class InventoryRowFragment(
     val dropButton =
         Components
             .button()
-            .withText("${Symbols.ARROW_DOWN}")
+            .withText("Drop")
             .withDecorations()
+            .build()
+
+    val eatButton =
+        Components
+            .button()
+            .withDecorations()
+            .withText("Eat")
             .build()
 
     override val root =
@@ -38,5 +46,6 @@ class InventoryRowFragment(
                         .build(),
                 )
                 addComponent(dropButton)
+                item.whenTypeIs<Food> { addComponent(eatButton) }
             }
 }

@@ -4,11 +4,13 @@ import com.yqmonline.attributes.Inventory
 import com.yqmonline.extensions.GameItem
 import org.hexworks.zircon.api.Components
 import org.hexworks.zircon.api.component.Fragment
+import org.hexworks.zircon.api.uievent.Processed
 
 class InventoryFragment(
     inventory: Inventory,
     width: Int,
     onDrop: (GameItem) -> Unit,
+    onEat: (GameItem) -> Unit,
 ) : Fragment {
     override val root =
         Components
@@ -52,6 +54,11 @@ class InventoryFragment(
                         row.dropButton.onActivated {
                             detach()
                             onDrop(item)
+                        }
+                        row.eatButton.onActivated {
+                            detach()
+                            onEat(item)
+                            Processed
                         }
                     }
                 }

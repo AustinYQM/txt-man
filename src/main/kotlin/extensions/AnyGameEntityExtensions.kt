@@ -14,6 +14,7 @@ import org.hexworks.amethyst.api.Response
 import org.hexworks.amethyst.api.entity.EntityType
 import org.hexworks.zircon.api.data.Tile
 import kotlin.reflect.KClass
+import kotlin.reflect.full.isSubclassOf
 import kotlin.reflect.full.isSuperclassOf
 
 var AnyGameEntity.position
@@ -56,3 +57,9 @@ val AnyGameEntity.blocksVision: Boolean
 
 inline fun <reified T : EntityType> Iterable<AnyGameEntity>.filterType(): List<AnyGameEntity> =
     filter { T::class.isSuperclassOf(it.type::class) }.toList()
+
+inline fun <reified T : EntityType> AnyGameEntity.whenTypeIs(fn: (GameEntity<T>) -> Unit) {
+    if (this.type::class.isSubclassOf(T::class)) {
+        fn(this as GameEntity<T>)
+    }
+}

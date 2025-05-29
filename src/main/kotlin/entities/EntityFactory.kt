@@ -2,14 +2,17 @@ package com.yqmonline.entities
 
 import com.yqmonline.attributes.BlockOccupier
 import com.yqmonline.attributes.CombatStats
+import com.yqmonline.attributes.EnergyLevel
 import com.yqmonline.attributes.EntityActions
 import com.yqmonline.attributes.EntityPosition
 import com.yqmonline.attributes.EntityTile
 import com.yqmonline.attributes.FungusSpread
 import com.yqmonline.attributes.Inventory
 import com.yqmonline.attributes.ItemIcon
+import com.yqmonline.attributes.NutritionalValue
 import com.yqmonline.attributes.Vision
 import com.yqmonline.attributes.VisionBlocker
+import com.yqmonline.entities.items.BatMeat
 import com.yqmonline.entities.items.Rock
 import com.yqmonline.entities.terrain.StairsDown
 import com.yqmonline.entities.terrain.StairsUp
@@ -19,30 +22,36 @@ import com.yqmonline.messages.Dig
 import com.yqmonline.systems.Attackable
 import com.yqmonline.systems.CameraMover
 import com.yqmonline.systems.Destructible
+import com.yqmonline.systems.DigestiveSystem
 import com.yqmonline.systems.Diggable
+import com.yqmonline.systems.EnergyExpender
 import com.yqmonline.systems.FogOfWar
 import com.yqmonline.systems.FungusGrowth
 import com.yqmonline.systems.InputReceiver
 import com.yqmonline.systems.InventoryInspector
 import com.yqmonline.systems.ItemDropper
 import com.yqmonline.systems.ItemPicker
+import com.yqmonline.systems.LootDropper
 import com.yqmonline.systems.Movable
 import com.yqmonline.systems.StairClimber
 import com.yqmonline.systems.StairDescender
 import com.yqmonline.systems.Wanderer
 import com.yqmonline.tiles.GameTileRepository.BAT
+import com.yqmonline.tiles.GameTileRepository.BAT_MEAT
 import com.yqmonline.tiles.GameTileRepository.FUNGUS
 import com.yqmonline.tiles.GameTileRepository.PLAYER
 import com.yqmonline.tiles.GameTileRepository.ROCK
 import com.yqmonline.tiles.GameTileRepository.STAIRS_DOWN
 import com.yqmonline.tiles.GameTileRepository.STAIRS_UP
 import com.yqmonline.tiles.GameTileRepository.WALL
+import com.yqmonline.utils.loggerFor
 import com.yqmonline.world.GameContext
 import org.hexworks.amethyst.api.builder.EntityBuilder
 import org.hexworks.amethyst.api.entity.EntityType
 import org.hexworks.amethyst.api.newEntityOfType
 import org.hexworks.zircon.api.GraphicalTilesetResources
 import org.hexworks.zircon.api.data.Tile
+import kotlin.random.Random
 
 fun <T : EntityType> newGameEntityOfType(
     type: T,
@@ -50,6 +59,8 @@ fun <T : EntityType> newGameEntityOfType(
 ) = newEntityOfType(type, init)
 
 object EntityFactory {
+    private val LOG = loggerFor<EntityFactory>()
+
     fun newPlayer() =
         newGameEntityOfType(Player) {
             attributes(
@@ -60,8 +71,9 @@ object EntityFactory {
                 CombatStats.create(maxHp = 100, attackValue = 10, defenseValue = 5),
                 Vision(9),
                 Inventory(10),
+                EnergyLevel(1000, 1000),
             )
-            behaviors(InputReceiver)
+            behaviors(InputReceiver, EnergyExpender)
             facets(
                 Movable,
                 CameraMover,
@@ -72,6 +84,8 @@ object EntityFactory {
                 ItemPicker,
                 InventoryInspector,
                 ItemDropper,
+                EnergyExpender,
+                DigestiveSystem,
             )
         }
 
@@ -126,7 +140,9 @@ object EntityFactory {
 
     fun newBat() =
         newGameEntityOfType(Bat) {
+            val meat: Int = Random.nextInt(1, 3)
             attributes(
+                Inventory(meat).apply { for (i in 0..meat) addItem(newBatMeat()) },
                 BlockOccupier,
                 EntityPosition(),
                 EntityTile(BAT),
@@ -137,7 +153,7 @@ object EntityFactory {
                 ),
                 EntityActions(Attack::class),
             )
-            facets(Movable, Attackable, Destructible)
+            facets(Movable, Attackable, LootDropper, ItemDropper, Destructible)
             behaviors(Wanderer)
         }
 
@@ -153,6 +169,22 @@ object EntityFactory {
                 ),
                 EntityPosition(),
                 EntityTile(ROCK),
+            )
+        }
+
+    fun newBatMeat() =
+        newGameEntityOfType(BatMeat) {
+            attributes(
+                ItemIcon(
+                    Tile
+                        .newBuilder()
+                        .withName("Meatball")
+                        .withTileset(GraphicalTilesetResources.nethack16x16())
+                        .buildGraphicalTile(),
+                ),
+                NutritionalValue(750),
+                EntityPosition(),
+                EntityTile(BAT_MEAT),
             )
         }
 }
