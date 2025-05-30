@@ -10,6 +10,8 @@ object GameConfig {
 
     const val DUNGEON_LEVELS = 2
 
+    const val GAME_NAME = "Working Title"
+
     val TILESET = CP437TilesetResources.rogueYun16x16()
     val THEME = ColorThemes.zenburnVanilla()
     const val SIDEBAR_WIDTH = 18

@@ -3,5 +3,5 @@ package com.yqmonline.attributes
 import org.hexworks.amethyst.api.base.BaseAttribute
 
 data class Vision(
-    val radius: Int,
+    var radius: Int,
 ) : BaseAttribute()

@@ -1,6 +1,7 @@
 package com.yqmonline.view
 
 import com.yqmonline.config.GameConfig
+import com.yqmonline.config.GameConfig.GAME_NAME
 import org.hexworks.zircon.api.ComponentDecorations.box
 import org.hexworks.zircon.api.ComponentDecorations.shadow
 import org.hexworks.zircon.api.Components
@@ -13,7 +14,7 @@ class StartView(
     private val grid: TileGrid,
 ) : BaseView(grid, GameConfig.THEME) {
     init {
-        val msg = "Welcome to Gwendolyn's Cave Adventure!"
+        val msg = GAME_NAME
 
         val header =
             Components

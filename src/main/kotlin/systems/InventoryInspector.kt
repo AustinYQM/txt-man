@@ -14,6 +14,7 @@ import com.yqmonline.messages.DropItem
 import com.yqmonline.messages.Eat
 import com.yqmonline.messages.InspectInventory
 import com.yqmonline.view.fragment.InventoryFragment
+import com.yqmonline.view.fragment.dialog.ExamineDialog
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import org.hexworks.amethyst.api.Consumed
@@ -30,7 +31,7 @@ import org.hexworks.zircon.api.uievent.Processed
 import org.hexworks.zircon.internal.component.modal.EmptyModalResult
 
 object InventoryInspector : MessageFacet<InspectInventory>(InspectInventory::class) {
-    val DIALOG_SIZE = Size.create(35, 15)
+    val DIALOG_SIZE = Size.create(60, 15)
 
     override suspend fun receive(message: InspectInventory): Response {
         val (context, itemHolder, position) = message
@@ -72,6 +73,7 @@ object InventoryInspector : MessageFacet<InspectInventory>(InspectInventory::cla
                     }
                     result
                 },
+                onExamine = { item -> screen.openModal(ExamineDialog(screen, item)) },
             )
 
         panel.addFragment(fragment)

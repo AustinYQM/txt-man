@@ -33,6 +33,13 @@ class InventoryRowFragment(
             .withText("Equip")
             .build()
 
+    val examineButton =
+        Components
+            .button()
+            .withDecorations()
+            .withText("Examine")
+            .build()
+
     override val root =
         Components
             .hbox()
@@ -56,5 +63,6 @@ class InventoryRowFragment(
                 addComponent(dropButton)
                 item.whenTypeIs<Food> { addComponent(eatButton) }
                 item.whenTypeIs<CombatItem> { addComponent(equipButton) }
+                addComponent(examineButton)
             }
 }

@@ -9,10 +9,12 @@ import com.yqmonline.messages.MoveDown
 import com.yqmonline.messages.MoveTo
 import com.yqmonline.messages.MoveUp
 import com.yqmonline.messages.PickItemUp
+import com.yqmonline.view.fragment.dialog.HelpDialog
 import com.yqmonline.world.GameContext
 import org.hexworks.amethyst.api.base.BaseBehavior
 import org.hexworks.cobalt.logging.api.LoggerFactory
 import org.hexworks.zircon.api.data.Position3D
+import org.hexworks.zircon.api.screen.Screen
 import org.hexworks.zircon.api.uievent.KeyCode
 import org.hexworks.zircon.api.uievent.KeyboardEvent
 
@@ -36,6 +38,7 @@ object InputReceiver : BaseBehavior<GameContext>() {
                 KeyCode.KEY_F -> player.moveDown(context)
                 KeyCode.KEY_P -> player.pickItemUp(currentPosition, context)
                 KeyCode.KEY_I -> player.inspectInventory(currentPosition, context)
+                KeyCode.KEY_H -> context.screen.showHelp()
                 else -> logger.debug("Unknown uiEvent ($uiEvent) does not have corresponding command. It is ignored.")
             }
         }
@@ -69,5 +72,9 @@ object InputReceiver : BaseBehavior<GameContext>() {
         context: GameContext,
     ) {
         receiveMessage(InspectInventory(context, this, position))
+    }
+
+    private fun Screen.showHelp() {
+        this.openModal(HelpDialog(this))
     }
 }

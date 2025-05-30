@@ -7,7 +7,9 @@ import com.yqmonline.config.GameConfig.WINDOW_HEIGHT
 import com.yqmonline.config.GameConfig.WINDOW_WIDTH
 import com.yqmonline.config.GameTileRepository.FLOOR
 import com.yqmonline.events.GameLogEvent
+import com.yqmonline.events.PlayerGainedLevel
 import com.yqmonline.view.fragment.PlayerStatsFragment
+import com.yqmonline.view.fragment.dialog.LevelUpDialog
 import com.yqmonline.world.Game
 import com.yqmonline.world.GameBuilder
 import org.hexworks.cobalt.databinding.api.extension.toProperty
@@ -86,6 +88,11 @@ class PlayView(
                 withNewLine = false,
                 withTypingEffectSpeedInMs = 10,
             )
+            KeepSubscription
+        }
+
+        Zircon.eventBus.subscribeTo<PlayerGainedLevel> {
+            screen.openModal(LevelUpDialog(screen, game.player))
             KeepSubscription
         }
 

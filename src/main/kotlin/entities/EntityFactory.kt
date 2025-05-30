@@ -7,6 +7,7 @@ import com.yqmonline.attributes.EntityActions
 import com.yqmonline.attributes.EntityPosition
 import com.yqmonline.attributes.EntityTile
 import com.yqmonline.attributes.Equipment
+import com.yqmonline.attributes.Experience
 import com.yqmonline.attributes.FungusSpread
 import com.yqmonline.attributes.Inventory
 import com.yqmonline.attributes.ItemCombatStats
@@ -47,6 +48,7 @@ import com.yqmonline.systems.Destructible
 import com.yqmonline.systems.DigestiveSystem
 import com.yqmonline.systems.Diggable
 import com.yqmonline.systems.EnergyExpender
+import com.yqmonline.systems.ExperienceAccumulator
 import com.yqmonline.systems.FogOfWar
 import com.yqmonline.systems.FungusGrowth
 import com.yqmonline.systems.HunterSeeker
@@ -79,18 +81,19 @@ object EntityFactory {
     fun newPlayer() =
         newGameEntityOfType(Player) {
             attributes(
+                CombatStats.create(maxHp = 100, attackValue = 10, defenseValue = 5),
+                EnergyLevel(1000, 1000),
                 EntityPosition(),
                 BlockOccupier,
                 EntityTile(PLAYER),
                 EntityActions(Dig::class, Attack::class),
-                CombatStats.create(maxHp = 100, attackValue = 10, defenseValue = 5),
                 Vision(9),
                 Inventory(10),
-                EnergyLevel(1000, 1000),
                 Equipment(
                     initialWeapon = newClub(),
                     initialArmor = newJacket(),
                 ),
+                Experience(),
             )
             behaviors(InputReceiver, EnergyExpender)
             facets(
@@ -105,6 +108,7 @@ object EntityFactory {
                 ItemDropper,
                 EnergyExpender,
                 DigestiveSystem,
+                ExperienceAccumulator,
             )
         }
 
