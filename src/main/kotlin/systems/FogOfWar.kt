@@ -1,8 +1,8 @@
 package com.yqmonline.systems
 
+import com.yqmonline.config.GameTileRepository.EMPTY
 import com.yqmonline.extensions.AnyGameEntity
 import com.yqmonline.extensions.position
-import com.yqmonline.tiles.GameTileRepository.EMPTY
 import com.yqmonline.world.GameContext
 import org.hexworks.amethyst.api.base.BaseBehavior
 import org.hexworks.zircon.api.data.Position3D

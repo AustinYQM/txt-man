@@ -5,8 +5,8 @@ import com.yqmonline.config.GameConfig.LOG_AREA_HEIGHT
 import com.yqmonline.config.GameConfig.SIDEBAR_WIDTH
 import com.yqmonline.config.GameConfig.WINDOW_HEIGHT
 import com.yqmonline.config.GameConfig.WINDOW_WIDTH
+import com.yqmonline.config.GameTileRepository.FLOOR
 import com.yqmonline.events.GameLogEvent
-import com.yqmonline.tiles.GameTileRepository.FLOOR
 import com.yqmonline.view.fragment.PlayerStatsFragment
 import com.yqmonline.world.Game
 import com.yqmonline.world.GameBuilder

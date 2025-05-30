@@ -16,6 +16,15 @@ import com.yqmonline.attributes.Vision
 import com.yqmonline.attributes.VisionBlocker
 import com.yqmonline.attributes.types.Armor
 import com.yqmonline.attributes.types.Weapon
+import com.yqmonline.config.GameTileRepository
+import com.yqmonline.config.GameTileRepository.BAT
+import com.yqmonline.config.GameTileRepository.BAT_MEAT
+import com.yqmonline.config.GameTileRepository.FUNGUS
+import com.yqmonline.config.GameTileRepository.PLAYER
+import com.yqmonline.config.GameTileRepository.ROCK
+import com.yqmonline.config.GameTileRepository.STAIRS_DOWN
+import com.yqmonline.config.GameTileRepository.STAIRS_UP
+import com.yqmonline.config.GameTileRepository.WALL
 import com.yqmonline.entities.items.BatMeat
 import com.yqmonline.entities.items.Club
 import com.yqmonline.entities.items.Dagger
@@ -40,6 +49,7 @@ import com.yqmonline.systems.Diggable
 import com.yqmonline.systems.EnergyExpender
 import com.yqmonline.systems.FogOfWar
 import com.yqmonline.systems.FungusGrowth
+import com.yqmonline.systems.HunterSeeker
 import com.yqmonline.systems.InputReceiver
 import com.yqmonline.systems.InventoryInspector
 import com.yqmonline.systems.ItemDropper
@@ -49,15 +59,6 @@ import com.yqmonline.systems.Movable
 import com.yqmonline.systems.StairClimber
 import com.yqmonline.systems.StairDescender
 import com.yqmonline.systems.Wanderer
-import com.yqmonline.tiles.GameTileRepository
-import com.yqmonline.tiles.GameTileRepository.BAT
-import com.yqmonline.tiles.GameTileRepository.BAT_MEAT
-import com.yqmonline.tiles.GameTileRepository.FUNGUS
-import com.yqmonline.tiles.GameTileRepository.PLAYER
-import com.yqmonline.tiles.GameTileRepository.ROCK
-import com.yqmonline.tiles.GameTileRepository.STAIRS_DOWN
-import com.yqmonline.tiles.GameTileRepository.STAIRS_UP
-import com.yqmonline.tiles.GameTileRepository.WALL
 import com.yqmonline.utils.loggerFor
 import com.yqmonline.world.GameContext
 import org.hexworks.amethyst.api.builder.EntityBuilder
@@ -365,5 +366,27 @@ object EntityFactory {
             0 -> newLightArmor()
             1 -> newMediumArmor()
             else -> newHeavyArmor()
+        }
+
+    fun newZombie() =
+        newGameEntityOfType(Zombie) {
+            attributes(
+                BlockOccupier,
+                EntityPosition(),
+                EntityTile(GameTileRepository.ZOMBIE),
+                Vision(10),
+                CombatStats.create(
+                    maxHp = 25,
+                    attackValue = 8,
+                    defenseValue = 4,
+                ),
+                Inventory(2).apply {
+                    addItem(newRandomArmor())
+                    addItem(newRandomWeapon())
+                },
+                EntityActions(Attack::class),
+            )
+            facets(Movable, Attackable, ItemDropper, LootDropper, Destructible)
+            behaviors(HunterSeeker or Wanderer)
         }
 }

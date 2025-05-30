@@ -1,7 +1,7 @@
 package com.yqmonline.blocks
 
+import com.yqmonline.config.GameTileRepository.FLOOR
 import com.yqmonline.entities.EntityFactory
-import com.yqmonline.tiles.GameTileRepository.FLOOR
 
 object GameBlockFactory {
     fun floor() = GameBlock(FLOOR)

@@ -1,13 +1,13 @@
 package com.yqmonline.blocks
 
+import com.yqmonline.config.GameTileRepository
+import com.yqmonline.config.GameTileRepository.EMPTY
+import com.yqmonline.config.GameTileRepository.FLOOR
+import com.yqmonline.config.GameTileRepository.PLAYER
+import com.yqmonline.config.GameTileRepository.WALL
 import com.yqmonline.extensions.AnyGameEntity
 import com.yqmonline.extensions.occupiesBlock
 import com.yqmonline.extensions.tile
-import com.yqmonline.tiles.GameTileRepository
-import com.yqmonline.tiles.GameTileRepository.EMPTY
-import com.yqmonline.tiles.GameTileRepository.FLOOR
-import com.yqmonline.tiles.GameTileRepository.PLAYER
-import com.yqmonline.tiles.GameTileRepository.WALL
 import kotlinx.collections.immutable.persistentMapOf
 import org.hexworks.cobalt.datatypes.Maybe
 import org.hexworks.zircon.api.data.BlockTileType

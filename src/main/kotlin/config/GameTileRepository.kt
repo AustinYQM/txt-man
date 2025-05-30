@@ -1,6 +1,5 @@
-package com.yqmonline.tiles
+package com.yqmonline.config
 
-import com.yqmonline.config.GameColors
 import com.yqmonline.config.GameColors.ACCENT_COLOR
 import com.yqmonline.config.GameColors.BAT_COLOR
 import com.yqmonline.config.GameColors.BAT_MEAT_COLOR
@@ -11,6 +10,7 @@ import com.yqmonline.config.GameColors.ROCK_COLOR
 import com.yqmonline.config.GameColors.UNREVEALED_COLOR
 import com.yqmonline.config.GameColors.WALL_BACKGROUND
 import com.yqmonline.config.GameColors.WALL_FOREGROUND
+import com.yqmonline.config.GameColors.ZOMBIE_COLOR
 import org.hexworks.zircon.api.color.ANSITileColor
 import org.hexworks.zircon.api.data.CharacterTile
 import org.hexworks.zircon.api.data.Tile
@@ -160,5 +160,13 @@ object GameTileRepository {
             .withCharacter('[')
             .withForegroundColor(ANSITileColor.BRIGHT_WHITE)
             .withBackgroundColor(GameColors.FLOOR_BACKGROUND)
+            .buildCharacterTile()
+
+    val ZOMBIE =
+        Tile
+            .newBuilder()
+            .withCharacter('z')
+            .withBackgroundColor(FLOOR_BACKGROUND)
+            .withForegroundColor(ZOMBIE_COLOR)
             .buildCharacterTile()
 }

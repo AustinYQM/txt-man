@@ -1,16 +1,15 @@
 package com.yqmonline.world
 
-import com.yqmonline.config.GameConfig.ARMOR_PER_LEVEL
 import com.yqmonline.config.GameConfig.BATS_PER_LEVEL
 import com.yqmonline.config.GameConfig.DUNGEON_LEVELS
 import com.yqmonline.config.GameConfig.FUNGI_PER_LEVEL
 import com.yqmonline.config.GameConfig.LOG_AREA_HEIGHT
 import com.yqmonline.config.GameConfig.ROCKS_PER_LEVEL
 import com.yqmonline.config.GameConfig.SIDEBAR_WIDTH
-import com.yqmonline.config.GameConfig.WEAPONS_PER_LEVEL
 import com.yqmonline.config.GameConfig.WINDOW_HEIGHT
 import com.yqmonline.config.GameConfig.WINDOW_WIDTH
 import com.yqmonline.config.GameConfig.WORLD_SIZE
+import com.yqmonline.config.GameConfig.ZOMBIES_PER_LEVEL
 import com.yqmonline.entities.EntityFactory
 import com.yqmonline.entities.Player
 import com.yqmonline.extensions.GameEntity
@@ -40,8 +39,7 @@ class GameBuilder(
         addBats()
         addRocks()
 
-        addWeapons()
-        addArmor()
+        addZombies()
 
         world.addWorldEntity(EntityFactory.newFogOfWar())
 
@@ -49,6 +47,14 @@ class GameBuilder(
             player = player,
             world = world,
         )
+    }
+
+    private fun addZombies() {
+        repeat(world.actualSize.zLength) { level ->
+            repeat(ZOMBIES_PER_LEVEL) {
+                EntityFactory.newZombie().addToWorld(level)
+            }
+        }
     }
 
     private fun addPlayer(): GameEntity<Player> =
@@ -102,22 +108,4 @@ class GameBuilder(
                 worldSize = WORLD_SIZE,
             ).buildGame()
     }
-
-    private fun addWeapons() =
-        also {
-            repeat(world.actualSize.zLength) { level ->
-                repeat(WEAPONS_PER_LEVEL) {
-                    EntityFactory.newRandomWeapon().addToWorld(level)
-                }
-            }
-        }
-
-    private fun addArmor() =
-        also {
-            repeat(world.actualSize.zLength) { level ->
-                repeat(ARMOR_PER_LEVEL) {
-                    EntityFactory.newRandomArmor().addToWorld(level)
-                }
-            }
-        }
 }
