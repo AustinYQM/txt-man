@@ -4,6 +4,7 @@ org-hexworks-zircon = "2020.2.0-RELEASE"
 ch-qos-logback = "1.5.18"
 com-github-gastalt-config = "0.35.7"
 org-hexworks-amethyst = "2021.0.3-RELEASE"
+org-jetbrains-kotlin = "2.2.0-RC"
 #org-hexworks-cobalt = "2022.1.0-RELEASE"
 
 [libraries]
@@ -22,9 +23,11 @@ com-github-gestalt-config-gestalt-kotlin = { module = "com.github.gestalt-config
 com-github-gestalt-config-gestalt-yaml = { module = "com.github.gestalt-config:gestalt-yaml", version.ref = "com-github-gastalt-config" }
 org-hexworks-amethyst-amethyst-core-jvm = { module = "org.hexworks.amethyst:amethyst.core-jvm", version.ref = "org-hexworks-amethyst" }
 #org-hexworks-cobalt-cobalt-core-jvm = { module = "org.hexworks.cobalt:cobalt.core-jvm", version.ref = "org-hexworks-cobalt" }
+com-charleskorn-kaml-kaml = "com.charleskorn.kaml:kaml:0.78.0"
 
 [plugins]
-org-jetbrains-kotlin-jvm = "org.jetbrains.kotlin.jvm:2.2.0-RC"
+org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm" , version.ref = "org-jetbrains-kotlin" }
+org-jetbrains-kotlin-plugin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "org-jetbrains-kotlin"}
 com-diffplug-spotless = "com.diffplug.spotless:7.0.3"
 com-github-ben-manes-versions = "com.github.ben-manes.versions:0.52.0"
 com-github-spotbugs = "com.github.spotbugs:6.1.12"

@@ -5,6 +5,7 @@ plugins {
     application
 
     alias(libs.plugins.org.jetbrains.kotlin.jvm)
+    alias(libs.plugins.org.jetbrains.kotlin.plugin.serialization)
 
     alias(libs.plugins.com.diffplug.spotless)
     alias(libs.plugins.com.github.spotbugs)
@@ -35,6 +36,8 @@ dependencies {
     implementation(libs.org.hexworks.amethyst.amethyst.core.jvm)
     //    implementation(libs.org.hexworks.cobalt.cobalt.core.jvm)
     implementation(libs.org.slf4j.slf4j.api)
+    
+    implementation(libs.com.charleskorn.kaml.kaml)
 
     // implementation(libs.com.github.gestalt.config.gestalt.core)
     // implementation(libs.com.github.gestalt.config.gestalt.kotlin)
