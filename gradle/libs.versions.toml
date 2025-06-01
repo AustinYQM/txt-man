@@ -24,6 +24,7 @@ com-github-gestalt-config-gestalt-yaml = { module = "com.github.gestalt-config:g
 org-hexworks-amethyst-amethyst-core-jvm = { module = "org.hexworks.amethyst:amethyst.core-jvm", version.ref = "org-hexworks-amethyst" }
 #org-hexworks-cobalt-cobalt-core-jvm = { module = "org.hexworks.cobalt:cobalt.core-jvm", version.ref = "org-hexworks-cobalt" }
 com-charleskorn-kaml-kaml = "com.charleskorn.kaml:kaml:0.78.0"
+io-github-quillraven-fleks-Fleks = "io.github.quillraven.fleks:Fleks:2.11"
 
 [plugins]
 org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm" , version.ref = "org-jetbrains-kotlin" }

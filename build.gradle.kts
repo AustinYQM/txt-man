@@ -38,6 +38,8 @@ dependencies {
     implementation(libs.org.slf4j.slf4j.api)
     
     implementation(libs.com.charleskorn.kaml.kaml)
+    
+    implementation(libs.io.github.quillraven.fleks.fleks)
 
     // implementation(libs.com.github.gestalt.config.gestalt.core)
     // implementation(libs.com.github.gestalt.config.gestalt.kotlin)
