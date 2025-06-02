@@ -36,9 +36,9 @@ dependencies {
     implementation(libs.org.hexworks.amethyst.amethyst.core.jvm)
     //    implementation(libs.org.hexworks.cobalt.cobalt.core.jvm)
     implementation(libs.org.slf4j.slf4j.api)
-    
+
     implementation(libs.com.charleskorn.kaml.kaml)
-    
+
     implementation(libs.io.github.quillraven.fleks.fleks)
 
     // implementation(libs.com.github.gestalt.config.gestalt.core)
