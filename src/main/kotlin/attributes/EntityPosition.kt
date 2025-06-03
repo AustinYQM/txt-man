@@ -8,6 +8,6 @@ class EntityPosition(
     initialPosition: Position3D = Position3D.unknown(),
 ) : BaseAttribute() {
     private val positionProperty = initialPosition.toProperty()
-
+  
     var position: Position3D by positionProperty.asDelegate()
 }
