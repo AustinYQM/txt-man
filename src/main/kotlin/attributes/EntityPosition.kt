@@ -5,7 +5,7 @@ import org.hexworks.cobalt.databinding.api.extension.toProperty
 import org.hexworks.zircon.api.data.Position3D
 
 
-//TODO: Completed Migration        
+//TODO: Completed Migration
 class EntityPosition(
     initialPosition: Position3D = Position3D.unknown(),
 ) : BaseAttribute() {
