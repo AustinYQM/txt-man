@@ -16,7 +16,7 @@ Dance dnace
 
 ..............
 
-My wife is wonderful. As is my life.
+My wife is wonderful.
 
 
 
